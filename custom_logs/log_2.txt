@@ -1,0 +1,40 @@
+Fourth lecture record's last part was watched.
+For increasing video speed by using, keyboard shortcuts of YouTube video player, were examined on a webpage [1] and it was found that "Shift + ." and "Shift + ," combos had been reserved for adjusting speed.
+Fifth lecture record was watched.
+Task instructions were saved into "task_instructions" folder which is in ".net_core_bootcamp" folder.
+Records of sixth and seventh lectures were watched.
+While updating Visual Studio, an online video tutorial [2] was watched for learning how to move Nortwind database tables into ASP.NET MVC project.
+An online video tutorial [3] was watched to learn how to download Nortwind database and a file from shared link [4] which has long SQL statements, was downloaded to execute to install the database.
+".txt" extension was removed from downloaded "instnwnd.sql.txt" file to execute properly.
+".net_core_bootcamp" folder and its content were moved and a Visual Studio solution whose name is "net_bootcamp" and "task_1" project were created in local GitHub repository.
+Microsoft.EntityFrameworkCore.SqlServer (v7.0.1), Microsoft.EntityFrameworkCore.Tools (v7.0.1) and Microsoft.EntityFrameworkCore.Design (v7.0.1) NuGet packages were installed.
+By benefiting description of watched online video tutorial [2] and seventh lecture record, "Scaffold-DbContext "Server = .; Database = Northwind; Trusted_Connection = True; TrustServerCertificate = True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -force" command was executed on Package Manager Console to move the tables into Models folder.
+A warning box which has "Would you like to trust the iis express ssl certificate?" text, was passed by pressing "Yes" button and certificate was installed by pressing another "Yes" button in "Security Warning" box.
+A Razor View file which has "List" template, was created for "Index" action.
+Some query codes from a webpage [5] was benefited to solve a problem about moving query result to "View".
+"Scaffolding" term was found in a webpage [6] for writing next sentence.
+"Details" View with "Details" template, was created by using Scaffolding.
+After examining a simple Tag Helper statement in a webpage [7], "asp-route-id" statement was changed to "asp-route-CustomerId" statement in "Index" View to pass CustomerId value into "Details" action.
+An error occured because of passing a null value to "Details" action and it was solved after finding its reason which is that not passing CustomerID column value into "Index" View, was found.
+Three tutorial videos [8] [9] [10] were watched shortly on YouTube.
+Some problems about design were noticed and their solution processes were delayed.
+"Create" View which has "Create" template, was created by usin Scaffolding.
+Adding row section of watched video [10], was examined and its code was used in coding process of creating new customer part of project.
+After getting achivements in all task missions, process of solving design problems, was started.
+Examined video [10] was re-examined to compare with current project and it was found that reason of a design problem is unchecking "Use a layout page" option in Scaffholding.
+"Create", "Details" and "Index" Views were re-created on Scaffholding window by checking Layout option.
+Solution processes of validation problem and other design problem which is that form inputs are on next line, were cancelled because they were judged to be unimportant.
+Updated database was exported as "Northwind.bacpac" file.
+Files about database, were moved to "database_files" folder.
+Task missions were examined before pushing repository and it was noticed that city column is missing in project.
+After adding city column, "CustomerID" colum was added on "Details" View because it was missing too.
+[1] Quincy Larson, https://www.freecodecamp.org/news/youtube-keyboard-shortcut-hotkey-list-repeat-speed-subtitles/, 12 October 2020.
+[2] Ahmet akın, https://youtu.be/EIav3wk1HSg, 27 March 2022.
+[3] Sandra Hawkins Programming Tutorials, https://youtu.be/AaNt3A4XzN8, 6 January 2022.
+[4] https://raw.githubusercontent.com/microsoft/sql-server-samples/master/samples/databases/northwind-pubs/instnwnd.sql
+[5] Ropstah, https://stackoverflow.com/questions/9819554/pass-an-anonymous-type-to-my-asp-net-mvc-view, 22 March 2012 at 10:07.
+[6] https://www.tutorialspoint.com/asp.net_mvc/asp.net_mvc_scaffolding.htm
+[7] Jamie Dunstan, https://stackoverflow.com/questions/34849846/asp-route-id-does-not-pass-parameter-value, 4 May 2017 at 14:39.
+[8] Yasir, https://youtu.be/dxjirtQnts4, 7 April 2019.
+[9] Yasir, https://youtu.be/6UUcS76AF5o, 9 April 2019.
+[10] Maneesha Senaviratne, https://youtu.be/LJR912keZ6w, 15 January 2020.
