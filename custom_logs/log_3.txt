@@ -1,0 +1,28 @@
+It was decided to read a textual tutorial [1] about .NET Core, which was found in another repository notes.
+It was started to a textual tutorial [2] whose title is ASP.NET Core Basics.
+While reading a webpage [3] of found textual tutorial, "edge server" term was noticed.
+Meanings "edge server" and "edge network" terms, were learnt by reading 3 webpage [4] [5] [6], shortly.
+"Invert!" extension was installed from Chrome Web Store [7] for providing reading without straining eyes.
+While reading a webpage from the tutorial [8], "extension method" terms was noticed and it was learnt from different tutorial webpage [9].
+After reading all webpages of ASP.NET Core Basics tutorial, it was started to read ASP.NET Core MVC tutorial [10] in same website.
+After reading all webpages of ASP.NET Core MVC tutorial, it was started to read Entity Framework Core tutorial [11] in same website.
+After reading all webpages of Entity Framework Core tutorial, it was started to read ASP.NET Core Blazor tuturial [12] in same website.
+Meaning of "scalable" term which in a webpage [13] of tutorial, was learnt on a webpage [14].
+All webpages of ASP.NET Core Blazor tuturial, were read but it was thought that tutorials of "Dot Net Tutorials" are insufficient.
+Eighth, ninth and tenth lecture records were watched.
+"\net_bootcamp\task_instructions\task_final\task_final.png" file was updated because of changing deadline.
+An ASP.NET Core Empty project whose name is "task_final", was created on same solution for final task by unchecking HTTPS configuration not using top-level statements.
+[1] https://dotnettutorials.net/course/asp-net-core-tutorials/
+[2] https://dotnettutorials.net/lesson/introduction-to-asp-net-core/
+[3] https://dotnettutorials.net/lesson/kestrel-web-server-asp-net-core/
+[4] BESIR KURT, https://www.codeturkiye.com/edge-sunucusu-nedir-ve-nasil-calisir/, 17/03/2022.
+[5] https://www.stackpath.com/edge-academy/what-is-an-edge-server/
+[6] https://www.netscout.com/what-is/network-edge-and-perimeter#:~:text=The%20network%20edge%20is%20generally,are%20communicating%20with%20the%20Internet.
+[7] GM, https://chrome.google.com/webstore/detail/invert/heidajcpkemganilmhockdniaknoojih, 15 November 2014.
+[8] https://dotnettutorials.net/lesson/asp-net-core-middleware-components/
+[9] https://www.tutorialsteacher.com/csharp/csharp-extension-method
+[10] https://dotnettutorials.net/lesson/introduction-asp-net-core-mvc/
+[11] https://dotnettutorials.net/lesson/entity-framework-core/
+[12] https://dotnettutorials.net/course/blazor-tuturial/
+[13] https://dotnettutorials.net/lesson/blazor-hosting-models/
+[14] plq, https://eksisozluk.com/olceklenebilir--155039, 01.02.2008 at 07:47.
