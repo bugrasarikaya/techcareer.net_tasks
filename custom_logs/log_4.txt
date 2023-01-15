@@ -1,0 +1,30 @@
+A default keyboard shortcut for setting a project as startup project, could not be found in keyboard options which has learnt in a webpage [1].
+"Program.cs" file was edited by using previous ASP.NET Core MVC project.
+A folder whose name is "wwwroot", was created.
+"wwwroot" folder was established by examining "wwwroot" folder of previous project.
+A "css" folder was created in "wwwroot" folder and a new "site.css" file was written in this file by using "site.css" file of previous project.
+"js" folder was created in "wwwroot" folder but any JavaScript file were not written because previous "site.js" file has only comment lines.
+"lib" folder was created in "wwwroot" folder.
+By using "Add Client-Side Library" window which was remembered by examining some research results, Bootstrap (v5.2.3) was installed into project but all files of its "css" and "js" folder, were included.
+"jquery@3.6.3", "jquery-validate@1.19.5" and "jquery-validation-unobtrusive@4.0.0" libraries were installed but files which are same as files of previous project, were included.
+To write previous sentence "same as" phrase was used instead of "same of" phrase after examining a webpage [2] briefly.
+"jquery-validate@1.19.5" had been installed on "wwwroot/lib/jquery-validate/" folder but destination was changed to "wwwroot/lib/jquery-validation/" on "libman.json" file for making it same as previous one.
+License files of libraries and "favicon.ico" file, were not added because they could not be found in "Add Client-Side Library" window.
+An empty MVC Controller whose name is "HomeController" was created by using ASP.NET Scaffolding.
+Controller of previous project was examined and class memmbers which are related to ILogger and IActionResult, were not added into new controller.
+"internal" access modifiers were added to some members of controller.
+"Home" and "Shared" folders were created into "Views" folder.
+After examining "Error.cshtml" file in "Shared" folder, class members which were not added, were written because it was thought that they are necessary.
+All "cshtml" files of "Shared" folder in previous project, were copied into new project.
+"ErrorViewModel.cs" file from "Models" folder in previous project, were copied into new project.
+Controller and copied files were edited by changing destination addresses and namespaces.
+An empty view was created by using scaffolder.
+Two red tic icons which have "Pending edit" descriptions, were noticed on left side of project icon and "Program.cs" icon but it was ignored and after trying to debug program, it was observerd that web program did not work on default browser.
+A video [3] about "Pending edit", was watched but after examining solution method, it was learnt that icon is a status indicator for changed files in Git repository.
+Problem was searched again briefly but problem was solved by testing to change "internal" access modifiers to "public" in controller.
+After examining two webpages [4] [5], it was learnt that using "internal" is necessary because of different assemblies.
+[1] Michael Kennedy, https://blog.michaelckennedy.net/2007/07/30/visual-studio-tricks-series-1-set-as-startup-project/, 30 July 2007.
+[2] Britcent, https://britcent.medium.com/same-with-or-same-as-different-from-than-or-to-similar-with-or-similar-to-adf324d512f0, 15 March 2021.
+[3] CodeWithShareef, https://youtu.be/fIj5fu5_epk, 29 June 2018.
+[4] https://stackoverflow.com/questions/41824957/can-i-make-an-asp-net-core-controller-internal
+[5] dotnetstep, Mark Amery, https://stackoverflow.com/questions/27457287/why-do-asp-net-mvc-controller-classes-need-to-be-public, 13 December 2014 at 10:22 (answered), 17 December 2017 at 1:06 (edited).
