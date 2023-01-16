@@ -1,0 +1,85 @@
+Source control system of current Visual Studio solution, was closed.
+Process of creating a login page, was started.
+"@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers" line was not added because it was found in "_ViewImports.cshtml" file.
+I wat noticed that "_Layout.cshtml" file is not working.
+Missing "site.js" file was copied from previous project but it did not fix because file has only comment lines.
+Missing "Privacy" controller and view were added but it did not fix.
+After examining a watched video, problem was solved by specifying layout file manually as using "Layout = "/Views/Shared/_Layout.cshtml";" line in "Index" view.
+After examining a video [2] on YouTube, it was learnt that an abbreviation of previous specification, is used in "_ViewStart.cshtml" file.
+It was learnt that "_ViewStart.cshtml" file should not be in "Shared" folder, after reading a webpage [3] briefly.
+"_ViewImports.cshtml" and "_ViewStart.cshtml" files were moved into parent folder.
+After examining a webpage [4] and sixth lecture record, a form was created by using Tag Helper.
+Two errors occured because of wrong usages of tags and Tag Helpers.
+"<br>" tag was tried to be written instead of "<br />" tag from sixth lecture record after examining a webpage [5] but Visual Studio converted it to "<br />" tag.
+After examining an online document [6], it was understood that a model is missing.
+"User" model was created.
+2 webpages [7] [8], A video [9] on YouTube, ninth lecture record were examining for remembering code first approach.
+"Microsoft.EntityFrameworkCore.SqlServer" (v7.0.2) and "Microsoft.EntityFrameworkCore.Tools" (v7.0.2) NuGet packages were installed.
+After examining ninth lecture record again, it was decided to using Fluent API for code first approach because using data annotations method is insufficient.
+"EF Core - Fluent API" sub-tutorial [10] in Entity Framework Tutorial website, was read.
+A webpage [11] about Fluent API, was read.
+A webpage [12] about separating configuration classes in Fluent API, was read.
+"UserConfiguration.cs" file was created in "Models" folder.
+"Microsoft.EntityFrameworkCore.Metadata.Builders" namespace which was found in ninth lecture recrod, was added for resolving an error.
+For writing previous sentence, difference between "resolve" and "solve" words, was learnt on a webpage [13].
+"char" type was selected for textual columns because it was learnt that "char" is faster than "varchar", on a webpage [14].
+"ShoppingListDbContext" class which is inherited from "DbContext" class, was created in "Models" folder.
+While writing "OnConfiguring" and "OnModelCreating" methods from ninth lecture record, "sp_db" name was decided as database name.
+After examining two [7] [15] webpages about migrations, it was understood that there will be multiple migrations during development.
+"Package Manager Console" was oppened by using "Tools > NuGet Package Manager > Package Manager Console" path which is remembered in a watched video [16] on YouTube.
+"add-migration migration_00" command was executed on "Package Manager Console" and migration file was it was build successfully.
+After spotting a mistake which is using string type for id_user property, "remove-migration" command was executed but an error which has "A connection was successfully established with the server, but then an error occurred during the login process. (provider: SSL Provider, error: 0 - Sertifika zinciri güvenilmeyen bir yetkili tarafından verildi.)" text, was occured.
+Method of using "Encrypt=False" text in connection string, which was found in a webpage [17], resolved the problem.
+It was observed that method of using "TrustServerCertificate=True" text in connection string, which was found second custom log file, resolved the issue too and this method was preferred.
+A more detailed resolution was found in 2 online documents [18] [19] but they were not implemented because of choosing faster method.
+Type of property, was changed to int and adding command was executed again.
+After execution, names custom log files, were edited by adding one "0" character next to underscore character because GitHub and Visual Studio sort these files in a wrong order.
+Database had been named as "sldb" but after seeing it in SMSS, renaming was decided by reverting updates and migrations.
+Reverting progress did not work because of existing database.
+By following a suggestion in a webpage [20], a manual deletion in SSMS, which is , was applied.
+Database was renamed as "sl_db" and EF Core commands were executed successfully.
+"Register" action was added.
+"Add" action from previous project, was added and instead of "NorthwindContext" class, "ShoppingListDbContext" class used but any "Users" member could not be found because "Users" property had been removed in "ShoppingListDbContext" class before during editing.
+Missing property was added and "Register" view and action were created and "Register" view was coded by benefiting "Create" view of previous project.
+"Index" view was edited by using style of "Register" view.
+Instead of writing title manually, "@ViewData["Title"]" statement was used between heading tags.
+Two videos [21] [22] about login system, were watched on YouTube.
+A webpage [23] about HttpPost and HttpGet attributes, was read.
+Two webpages [24] [25] about action overloading, were examined.
+HttpPost and HttpGet attributes were added for overloading "Index" and "Register" actions.
+A webpage [26] was read for learning difference between "First" and "FirstOrDefault" methods.
+It was learnt that LINQ uses query syntax and method syntax which has lambda operator, in a webpage [27].
+It was learnt that performances of query syntax and method syntax, are same, in a webpage [27].
+A watched video [21] was examined and its login code was used by benefiting.
+It was observed that after entering wrong inputs, "RedirectToAction" method cleared the form inputs but "View" did not.
+It was set that a successful login opens created simple "Main" view.
+An user whose username is "admin" and password is "12345", was created on "Register" view.
+By using created user's info, login process was applied successfully.
+[1] Gençay Yıldız, https://youtu.be/ZIdUe9bIKZ0, 3 January 2021.
+[2] WebGentle, https://youtu.be/Kv7JEOUuOdI, 30 March 2020.
+[3] Nkosi, https://stackoverflow.com/questions/50553048/viewstart-cshtml-does-not-seem-to-be-read-from-views, 27 May 2018 at 14:26.
+[4] ISTVÁN, https://www.tektutorialshub.com/asp-net-core/asp-net-core-form-tag-helper/, 6 February 2021.
+[5] https://stackoverflow.com/questions/1946426/html-5-is-it-br-br-or-br
+[6] https://learn.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-7.0, 10/29/2022.
+[7] Mukesh Kumar, https://www.c-sharpcorner.com/article/code-first-approach-in-asp-net-core-mvc-with-ef-core-migration/, 26 September 2018.
+[8] Harpreet Singh, https://www.c-sharpcorner.com/UploadFile/219d4d/working-with-multiple-tables-in-mvc-using-entity-framework/, 11 December 2020.
+[9] Murat Yücedağ, https://youtu.be/Y72HGzrcZlQ, 17 February 2020.
+[10] https://www.entityframeworktutorial.net/efcore/fluent-api-in-entity-framework-core.aspx
+[11] GeeksArray, https://geeksarray.com/blog/using-fluent-api-in-efcore-code-first.
+[12] https://www.learnentityframeworkcore.com/configuration/fluent-api
+[13] pythonpoole, https://hinative.com/questions/882111, 18 Aug 2016.
+[14] Chris Saxon, https://asktom.oracle.com/pls/apex/f?p=100:11:0::::P11_QUESTION_ID:2668391900346844476, 31 October 2015 at 12:03 AM UTC.
+[15] https://www.learnentityframeworkcore.com/migrations
+[16] Ahmet akın, https://youtu.be/EIav3wk1HSg, 27 March 2022.
+[17] Amit Potdar, https://learn.microsoft.com/en-us/answers/questions/663116/a-connection-was-successfully-established-with-the, 15 Dec 2021, 3:42 PM.
+[18] https://learn.microsoft.com/en-us/troubleshoot/sql/database-engine/connect/error-message-when-you-connect, 12/30/2022.
+[19] https://learn.microsoft.com/en-us/dotnet/framework/wcf/feature-details/how-to-view-certificates-with-the-mmc-snap-in, 09/15/2021.
+[20] NSGaga-mostly-inactive, Mark Amery, https://stackoverflow.com/questions/16035333/how-to-delete-and-recreate-from-scratch-an-existing-ef-code-first-database, 18 Apr 2013 at 12:05 (answered), 16 Dec 2017 at 20:24 (edited).
+[21] Murat Yücedağ, https://youtu.be/CKprwMGWS8k, 8 June 2021.
+[22] Murat Yücedağ, https://youtu.be/1rpMNF56IuY, 8 June 2021.
+[23] Rakesh Alajipur, https://www.c-sharpcorner.com/blogs/httpget-and-httppost-attributes-in-asp-net-mvc, 30 Jul 2018.
+[24] Joydip Kanjilal, https://www.infoworld.com/article/3600190/how-to-overload-action-methods-in-aspnet-core-mvc-5.html
+[25] https://stackoverflow.com/questions/436866/can-you-overload-controller-methods-in-asp-net-mvc
+[26] Satinder Singh, https://codepedia.info/difference-between-first-and-firstordefault-in-linq, 06 November 2021.
+[27] Soner Gönü, https://www.quora.com/C-Is-there-a-difference-between-LINQ-and-lambda-expressions.
+[27] Sabah Shariq, https://social.msdn.microsoft.com/Forums/sqlserver/en-US/15948827-3163-48d0-b591-8654ad86d444/linq-vs-lambda?forum=csharpgeneral, 25 May 2016 at 9:23 AM.
