@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using task_final.Models;
 
@@ -10,9 +11,11 @@ using task_final.Models;
 namespace taskfinal.Migrations
 {
     [DbContext(typeof(ShoppingListDbContext))]
-    partial class ShoppingListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230117201759_migration_02")]
+    partial class migration02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,6 +38,7 @@ namespace taskfinal.Migrations
                         .HasColumnType("varchar");
 
                     b.Property<string>("role")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar");
 

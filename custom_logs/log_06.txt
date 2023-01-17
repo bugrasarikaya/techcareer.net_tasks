@@ -1,0 +1,57 @@
+"sl_db" database was exported by using "Right Click > Tasks > Export Data-tier Application..." path.
+7 webpages [1] [2] [3] [4] [5] [6] [7] about authorization, were read.
+Five videos [8] [9] [10] [11] [12] about authorization, were watched.
+4 webpages [13] [14] [15] [16], were read.
+A controller whose name is "AdminController" was created and "[Authorize(Roles = "Admin")]" was added to it.
+"Main" view  was moved to created "Admin" folder.
+"app.UseAuthentication();" line was added into "Program.cs" file before "app.UseAuthorization();" line because it was read that authenticaiton must be before authorization line, on a webpage [17].
+Server name was replaced with "." character in connection string which is in "ShoppingListDbContext.cs" file because another developer cannot run program without editing it.
+A video [18] was watched.
+By using some code lines from examined webpage [13], an authentication system was tried to be added but and error occured which has "InvalidOperationException: The provided identity of type 'System.Security.Claims.ClaimsIdentity' is marked IsAuthenticated = true but does not have a value for Name. By default, the antiforgery system requires that all authenticated identities have a unique Name. If it is not possible to provide a unique Name for this identity, consider extending IAntiforgeryAdditionalDataProvider by overriding the DefaultAntiforgeryAdditionalDataProvider or a custom type that can provide some form of unique identifier for the current user." text.
+After reading a webpage [19] briefly, problem was solved by adding more option to cookie.
+Copied options were changed.
+It was learnt that "HttpOnly" property which is assigned as "true", makes cookies only accessible on server-side, in two webpages [15].
+Function of "SlidingExpiration" property was learnt on a webpage [21].
+In console screen, a warning which has "warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3] Failed to determine the https port for redirect." text, was noticed.
+Warning was diseapeared after removing "app.UseHttpsRedirection();" line which had been used from a webpage [13], in "Program.cs".
+Code of establishing ClaimIdentity, was polished by examining two webpages [22] [23].
+"Index" action and "Index" view with their paths, were renamed as "Login".
+"role" column was added by using model class and migration works.
+"role" column of "admin" user was changed changed to "Admin" manually on SSMS.
+"if-else "statement in "Login" action, was expanded by checking other all roles which are "Admin" and "User".
+"UserController" class with a view, was created.
+Second user which has "user" username, "54321" password and "User "role, was created on SSMS.
+Title of "Main" views, were changed by adding its controller name.
+Aplication was tested and it was observed that a bug was occurred.
+While examining previous bug by using "breakpoint" and "quick watch", it was seen that value of "role" key, has multiple space character at ending.
+For trying to resolve bug, textual column types were changed to "varchar".
+After executing "add-migration migration_02" and then "update-base" commands, application was tested but same result was obtained.
+While adding a record on "Register" view, an error was occured because of null role value.
+After making "role" column nullable, "migration_03" was implemented and a dumb user was registered.
+It was observed that new record has no redundant space characters.
+Reduntant spaces of previous records and dumb record were deleted manually.
+Application was tested and successful result was obtained.
+Database was exported by overwriting.
+[1] Mukesh Kumar, https://www.c-sharpcorner.com/article/authentication-and-authorization-in-asp-net-core-mvc-using-cookie/, 12 December 2018.
+[2] Jaipal Reddy, https://www.c-sharpcorner.com/article/simple-login-application-using-Asp-Net-mvc/, 27 March 2019.
+[3] https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-7.0, 07/27/2022.
+[4] https://learn.microsoft.com/en-us/aspnet/core/security/authorization/simple?view=aspnetcore-7.0
+[5] Ashwani Bakshi, https://www.c-sharpcorner.com/blogs/applying-authorization-using-session-in-asp-net-mvc, 08 Dec 2017.
+[6] Munib Butt, https://www.c-sharpcorner.com/article/adding-role-authorization-to-a-asp-net-mvc-core-application/, 06 May 2020.
+[7] Sandeep Singh Shekhawat, https://www.c-sharpcorner.com/article/asp-net-core-mvc-authentication-and-role-based-authorization-with-asp-net-core/, 18 Jan 2017.
+[8] Murat Yücedağ, https://youtu.be/30ak9j1SEWE, 8 October 2021.
+[9] Murat Yücedağ, https://youtu.be/J4_knfqpEqM, 8 October 2021. 
+[10] Murat Yücedağ, https://youtu.be/s7QYSiYkxmo, 8 October 2021.
+[11] Murat Yücedağ, https://youtu.be/B9uqMYiBzlE, 12 October 2021.
+[12] Murat Yücedağ, https://youtu.be/x8D4w5JuUyE, 12 October 2021.
+[13] Vivek Jaiswal, http://www.voidgeeks.com/tutorial/Role-Based-Authorization-in-ASPNET-Core-Application/9.
+[14] https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-7.0, 06/04/2022.
+[15] https://www.acunetix.com/vulnerabilities/web/asp-net-cookies-accessible-from-client-side-scripts/
+[16] https://stackoverflow.com/questions/49512450/asp-net-core-2-0-cookie-authentication-with-session-variable
+[17] HMZ, https://stackoverflow.com/questions/62792639/authorizeroles-admin-not-working-in-net-core-3-0, 8 July 2020 at 10:46.
+[18] WebGentle, https://youtu.be/CvTQKS95mug, 3 November 2020.
+[19] mnu-nasir, Lukas, https://stackoverflow.com/questions/60580907/cookie-authentication-is-not-working-in-asp-net-core-application, 7 March 2020 at 18:30 (answered), 10 September 2020 at 9:45 (edited).
+[20] https://learn.microsoft.com/en-us/dotnet/api/system.web.httpcookie.httponly?redirectedfrom=MSDN&view=netframework-4.8.1#System_Web_HttpCookie_HttpOnly
+[21] mfanto, https://stackoverflow.com/questions/13637856/net-caching-how-does-sliding-expiration-work, 15 September 2017 at 2:21.
+[22] Gérald Barré, https://www.meziantou.net/cookie-authentication-in-asp-net-core-2-without-asp-net-identity.htm, 06/22/2017.
+[23] darenm, https://github.com/madskristensen/Miniblog.Core/issues/57, 16 March 2018.
