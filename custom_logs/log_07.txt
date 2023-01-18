@@ -1,0 +1,16 @@
+Accidentally some useless files were generated while trying to create a layout view by using scaffholder.
+Generated files which are "Data", "bundleconfig.json", "ScaffoldingReadMe.txt", "dist" folders and licenses, were deleted and locations of some of them, were detected on GitHub Desktop.
+With "ViewContext.RouteData.Values["controller"]" statement which was found in a webpage [1], controller was checked in "_ViewStart.cshtml" file for using different layout views.
+"_LayoutAdmin.cshtml" file was created and after testing, an unsuccessful result was obtained.
+Thanks to "ToString" method, found statement was converted to string for checking and expected result was obtained.
+"Home" controller was renamed as "Login" and its "Login" action and view were renamed as "Main".
+"Privacy" view was deleted.
+"task_final" texts in views, were renamed as "Shopping List".
+"CS8602" warning was noticed in "_ViewStart.cshtml" file and it was resolved by making statements nullable with "?" operator.
+A webpage was read for differences between "Login", "Log In", "Logout" and "Log Out" phrases but instead of derivated login word, derivated sign words were used for naming action methods for dissociating with their control names.
+"SignOut" action method was added into "AdminController.cs" and "SignOutAsync" method with its cookie scheme argument, was used for signing out.
+Because "SignOut" action caused to occur CS0114 warning, action names which were derivated from sign word, were renamed as "LogIn" and "LogOut".
+"_LayoutUser.cshtml" file was created by copying "_LayoutAdmin.cshtml" file and "LogOut" action was added for "User" controller too by copying.
+It was noticed that custom cookie whose name is "authentication", disappeared after logging out process, on developer window of browser.
+Logout implementations was added into "_LayoutUser.cshtml" file.
+[1] Christian Dalager, awe, https://stackoverflow.com/questions/362514/ho.w-can-i-return-the-current-action-in-an-asp-net-mvc-view, 9 Feb 2009 at 11:42 (answered), 21 May 2014 at 9:57 (edited).

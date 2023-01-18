@@ -1,25 +1,23 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
-using System.Security.Principal;
 using task_final.Models;
 namespace task_final.Controllers {
     [AllowAnonymous]
-    public class HomeController : Controller {
-        private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger) {
+    public class LoginController : Controller {
+        private readonly ILogger<LoginController> _logger;
+        public LoginController(ILogger<LoginController> logger) {
             _logger = logger;
         }
         [HttpGet]
-        public IActionResult Login() {
+        public IActionResult Main() {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Login(User user) {
+        public async Task<IActionResult> LogIn(User user) {
             ShoppingListDbContext context = new ShoppingListDbContext();
             var result = context.Users.FirstOrDefault(u => u.username == user.username && u.password == user.password);
             context.Dispose();
@@ -35,8 +33,8 @@ namespace task_final.Controllers {
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
                     return RedirectToAction("Main", "User");
                 }
-                else return RedirectToAction();
-            } else return RedirectToAction();
+                else return RedirectToAction("Main");
+            } else return RedirectToAction("Main");
         }
         [HttpGet]
         public IActionResult Register() {
@@ -48,7 +46,7 @@ namespace task_final.Controllers {
             context.Users.Add(user);
             context.SaveChanges();
             context.Dispose();
-            return Redirect("Login");
+            return RedirectToAction("Main");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {

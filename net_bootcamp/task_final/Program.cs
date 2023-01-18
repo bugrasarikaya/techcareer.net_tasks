@@ -12,20 +12,20 @@ namespace task_final {
                 .AddCookie(options => {
                     options.Cookie.Name = "authentication";
                     options.Cookie.HttpOnly = true;
-                    options.LoginPath = new PathString("/Home/Login");
-                    options.LogoutPath = new PathString("/Home/Login");
-                    options.AccessDeniedPath = new PathString("/Home/Login");
+                    options.LoginPath = new PathString("/Login/Main");
+                    options.LogoutPath = new PathString("/Login/Main");
+                    options.AccessDeniedPath = new PathString("/Home/Main");
                     options.ExpireTimeSpan = TimeSpan.FromDays(1);
                     options.SlidingExpiration = false;
                 });
             var app = builder.Build();
-            if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/Home/Error");
+            if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/Login/Error");
             app.UseStaticFiles();
             app.UseRouting();
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Login}/{id?}");
+            app.MapControllerRoute(name: "default", pattern: "{controller=Login}/{action=Main}/{id?}");
             app.Run();
         }
     }
