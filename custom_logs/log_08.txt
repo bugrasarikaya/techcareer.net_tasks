@@ -1,0 +1,79 @@
+"Products" actions and views were added for "Admin" controller.
+"Users" actions and views were added for "Admin" controller.
+"Product" class was added in "Model folder
+IDE1006 warning were taken care of in "User" class and to resolve it, properties were renamed as Pascal case style by using "Right click > Rename..." path.
+CS8618 warning were taken care of in "User" class and to resolve it, a propertie was made as non-nullable by assigning it with null which has a null-forgiving operator and some of them were made as nullable by adding "?" notation after examining 4 webpages [1] [2] [3] [4] and seventh lecture record.
+Passive voice sentences of "take care of" phrase, were examined in a webpage [5] for editing previous 2 sentences.
+Nullable and non-nullable implementations were added to product table.
+After examining 4 webpages [6] [7] [8] [9], a new model was decided to be created for saving images in database with "varbinary(max)" type.
+"Image" class was created in "Models" folder and primary column names of created models, were changed to "ID".
+Property type was set as "byte" for image data after examining binary converter code in a webpage [7] and "BinaryReader" class from webpage, was examined in another webpage [10] briefly.
+Additional properties were added for creating relationship after examining three sources [11] [12].
+For trying to configure foreign key, "HasForeignKey" method which was found in a webpage [13], was used but it did not work with "EntityTypeBuilder" class.
+After examining some webpages [14], it was thought that foreign key configuration was applied in a wrong class.
+But after examining some more webpages [16] [17] [18], it was understood that foreign key configuration was applied incorrectly.
+Implemenation was applied and "text" type which was found in a webpage [19], was added to "Description" column instead of "tinytext" which was found in another webpage [20].
+"float" type which was found in a webpage [19], was added to "Price" column, although its property type is "double" because some framework methods has double arguments.
+"ImageConfiguration" class was created after completing "ProductConfiguration" class.
+After applying configurations in overrided "OnModelCreating" method which is in "ShoppingListDbContext" class, "add-migration migration_04" and "update-data" commands were executed.
+After examining a watched video [12], new database diagram was tried to create on SSMS for examining result but a message which is "This database does not have one or more of the support objects required to use database diagramming. Do you wish to create them?", appeared.
+"Yes" button of message box, was clicked because there was an instruction about clicking "Yes" button in an examined webpage [21] which is about encountered message box.
+After apllying previous instruction, tables which have expected relations, were observed but diagram was not saved.
+While creating "AddProduct" actions in "AdminController" class, it was observed that adding different attributes, is not enought for overloading actions.
+For learning usage of multiple model in one view, a webpage [22] and fifth lecture record, were examined and "ViewModel" concept was discovered.
+[1] Simon Lehmann, lets do it, https://stackoverflow.com/questions/67505347/non-nullable-property-must-contain-a-non-null-value-when-exiting-constructor-co, 9 Dec 2021 at 12:26 (answered), 9 Dec 2021 at 12:29 (edited).
+Empty "ProductImageGetViewModel" and "ProductImageSetViewModel" classes were added in created "ViewModels" folder.
+"BinaryImage" property was renamed as "Binary", with "migration_05".
+A table about "image" vs "varbinary(max)", was examined briefly on webpage [23].
+"HttpPostedFileBase" type which was found in examined webpages [9] [24], could not be used and it was learnt that type was removed and new type became "IFormFile", in a webpage [25].
+A webpage [26] about uploading file, was examined.
+Needed properties from "Image" and "Product" models and a property which has "IFormFile" was added into "ProductImageSetViewModel" class.
+Namespace of "ViewModels", was added into "_ViewImports.cshtml".
+View of "ProductImageSetViewModel" class was created by using scaffholding with "Create" template and file input was added.
+"enctype = "multipart/form-data" statement which was found in a webpage, was added for resolving unvalidated file.
+2 webpages [28] [29] were read briefly for learning "enctype = "multipart/form-data" statement.
+By benefiting two webpages [30] [31], "accept" HTML attribute was added for filtering file uploading window.
+Examined byte converter code [7] was adapted to current application but "byte" type was changed to "byte[]" in "Image" class and any new migration was not applied.
+It was remembered that there a system class or property whose name is "Image" in Windows forms but it was ignored because IDE did not show some error.
+It was learnt that "SaveChanges" method changes inserted record's content, in a webpage [32] and with this knowledge, last ID value of "Images" table was obtained to add into foreign key of "Products" table.
+A code was written in "AddProduct" action for adding dumb records to database for testing and it was observed that form contents were in database.
+"ProductImageGetViewModel" class was filled with necessary properties and an its view was created by using scaffholding with "List" template.
+Method of showing database images, was learnt by examining 3 webpages [33] [34] [35].
+A string property for image source, was added to "ProductImageGetViewModel" model.
+By using a code from an examined webpage [35], "varbinary" type image was converted to a proper type and one object was transmitted "Products" view which was edited to "Details" template for testing.
+After testing, product details with image, was seen.
+Written code lines were edited to show multiple products but they needed to be polished.
+[2] https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references, 11/03/2022.
+[3] https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-forgiving, 12/02/2022.
+[4] https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1?view=net-7.0
+[5] https://forum.english.best/t/the-passive-voice-of-take-care-of/35804
+[6] marc_s, Saineshwar Bageri - MVP, https://stackoverflow.com/questions/5613898/storing-images-in-sql-server, 10 April 2011 at 18:44 (answered), 22 July 2019 at 14:53 (edited).
+[7] https://bidb.itu.edu.tr/seyir-defteri/blog/2013/09/06/c-ile-veritaban%C4%B1na-resim-ekleme-ve-kaydedilen-verileri-%C3%A7ekme, 06 September 2013.
+[8] Eralper YILMAZ, https://www.kodyaz.com/t-sql/save-image-to-database-table-in-sql-server.aspx.
+[9] Anshu Kumar, https://www.c-sharpcorner.com/blogs/how-to-save-image-in-database-and-display-it-into-views-in-mvc-5, 28 September 2017.
+[10] https://learn.microsoft.com/en-us/dotnet/api/system.io.binaryreader?view=net-7.0
+[11] https://www.entityframeworktutorial.net/code-first/configure-one-to-one-relationship-in-code-first.aspx
+[12] Murat Yücedağ, https://youtu.be/2F1dLAsAyRg, 12 November 2019.
+[13] https://www.learnentityframeworkcore.com/configuration/fluent-api/hasforeignkey-method
+[14] https://learn.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key, 01/12/2023.
+[15] Lukasz, https://stackoverflow.com/questions/5656159/entity-framework-4-1-code-first-foreign-key-ids, 13 April 2011 at 21:54.
+[16] Marinko Spasojevic, https://code-maze.com/efcore-relationships/, 13 January 2022.
+[17] Marco, https://stackoverflow.com/questions/47307024/how-to-set-foreignkey-and-index-properties-using-ientitytypeconfiguration-in-ef, 15 November 2017 at 13:02.
+[18] https://www.learnentityframeworkcore.com/configuration/one-to-one-relationship-configuration
+[19] https://www.promotic.eu/en/pmdoc/Subsystems/Db/MsSQL/DataTypes.htm
+[20] https://www.mysqltutorial.org/mysql-text/
+[21] https://learn.microsoft.com/en-us/sql/ssms/visual-db-tools/walkthrough-adding-and-changing-a-database-diagram?view=sql-server-ver16, 11/19/2022.
+[22] Jignesh Trivedi, https://www.c-sharpcorner.com/UploadFile/ff2f08/multiple-models-in-single-view-in-mvc/, 24 Jun 2021.
+[23] https://sqltutorialtips.blogspot.com/2016/11/image-vs-varbinarymax.html, 30 November 2016.
+[24] Nitin, https://www.c-sharpcorner.com/article/upload-files-in-asp-net-mvc-5/, 09 June 2021.
+[25] Mudassar Khan, https://www.aspsnippets.com/Articles/Solved-HttpPostedFileBase-not-working-in-ASPNet-Core.aspx, 03 Jan 2022.
+[26] https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-7.0, 01/10/2023.
+[27] Yogeshkumar Hadiya, https://www.c-sharpcorner.com/article/upload-single-or-multiple-files-in-asp-net-core-using-iformfile2/, 14 Feb 2022.
+[28] https://stackoverflow.com/questions/1342506/why-is-form-enctype-multipart-form-data-required-when-uploading-a-file
+[29] https://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean
+[30] Yiyi You, https://stackoverflow.com/questions/67539226/asp-net-core-iformfile-validation, 15 May 2021 at 1:47.
+[31] https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
+[32] Ladislav Mrnka, ninbit, https://stackoverflow.com/questions/5212751/how-can-i-retrieve-id-of-inserted-entity-using-entity-framework, 6 Mar 2011 at 19:18 (answered), 30 Nov 2019 at 17:31 (edited).
+[33] Kannadasan G, https://www.c-sharpcorner.com/article/mvc-display-image-from-byte-array/, 14 November 2017.
+[34] Chris Pratt, https://stackoverflow.com/questions/49865677/display-image-from-byte-array-in-asp-net-mvc-core, 17 April 2018 at 13:35.
+[35] dav_i, https://stackoverflow.com/questions/17952514/asp-net-mvc-how-to-display-a-byte-array-image-from-model, 30 July 2013 at 20:19.

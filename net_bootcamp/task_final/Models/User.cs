@@ -1,8 +1,8 @@
 ﻿namespace task_final.Models {
 	public class User {
-		public int id_user { get; set; }
-		public string username { get; set; }
-		public string password { get; set; }
-        public string role { get; set; }
+		public int ID { get; set; }
+		public string Username { get; set; } = null!;
+		public string Password { get; set; } = null!;
+        public string? Role { get; set; }
     }
 }

@@ -19,16 +19,16 @@ namespace task_final.Controllers {
         [HttpPost]
         public async Task<IActionResult> LogIn(User user) {
             ShoppingListDbContext context = new ShoppingListDbContext();
-            var result = context.Users.FirstOrDefault(u => u.username == user.username && u.password == user.password);
+            var result = context.Users.FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
             context.Dispose();
             if (result != null) {
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-                if (result.role == "Admin") {
+                if (result.Role == "Admin") {
                     identity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
                     return RedirectToAction("Main", "Admin");
                 }
-                else if(result.role == "User") {
+                else if(result.Role == "User") {
                     identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
                     return RedirectToAction("Main", "User");
@@ -46,6 +46,7 @@ namespace task_final.Controllers {
             context.Users.Add(user);
             context.SaveChanges();
             context.Dispose();
+
             return RedirectToAction("Main");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

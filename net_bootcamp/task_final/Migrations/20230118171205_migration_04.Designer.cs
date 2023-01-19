@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using task_final.Models;
 
@@ -11,9 +12,11 @@ using task_final.Models;
 namespace taskfinal.Migrations
 {
     [DbContext(typeof(ShoppingListDbContext))]
-    partial class ShoppingListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230118171205_migration_04")]
+    partial class migration04
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace taskfinal.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<byte[]>("Binary")
+                    b.Property<byte[]>("BinaryImage")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("varbinary(max)");
