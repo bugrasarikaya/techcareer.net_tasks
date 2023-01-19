@@ -1,0 +1,22 @@
+Height and weight values of image on HTML, were changed by using "height" HTML attribute which was found in a webpage [1].
+"ProductImageViewModel" file with its necessary properties and its "Detail" view, were created.
+"Detail" action was created and coded.
+"ProductEdit" view was created by scaffholding and it was observerd that input blanks were filled without using "value" HTML attribute.
+Difference between "Update" and "SaveChanges" method, was remembered in seventh lecture record and "SaveChanges" was used for editing product.
+"OriginalProductID" and "OriginalImageID" properties were added to "ProductImageViewModel" class because it was thought that previous values of ID columns were necessary before editing.
+Original ID values were passed with hidden HTML input which was remembered in a webpage [2].
+ID columns could not be changed and then it was learnt that changing primary columns, are not allowed, in 2 webpages [3] [4].
+Primary key edition inputs were removed and ID values were passed by using hidden HTML input.
+Dumb inputs were entered and then changed values were seen.
+A method about pre-filling image file in "ProductEdit" view, was tried to be found but it was learnt that it is not allowed too, in a webpage [5].
+From previous webpage [5], a suggestion to remove validation and keep image same if its null, was applied and it was worked.
+"ProductDelete" action was created and product deletion was implemented by using "remove" method which is found in a webpage [6].
+"Product" word was added on the left side of some actions and views to prevent conflicting with "user" actions and views.
+"AddProduct" actions and views were renamed as "ProductAdd".
+"Products" actions and views were renamed as "ProductList".
+[1] https://www.w3schools.com/tags/att_img_width.asp
+[2] Jamiec, https://stackoverflow.com/questions/13162819/adding-additional-parameter-to-form-submit, 31 October 2012 at 16:49.
+[3] Ivan Stoev, https://stackoverflow.com/questions/73704497/the-property-is-part-of-a-key-and-so-cannot-be-modified-or-marked-as-modified-f, 13 September 2022 at 16:29.
+[4] rowanmiller, https://github.com/dotnet/efcore/issues/4560, 16 February 2016.
+[5] poke, https://stackoverflow.com/questions/63199707/asp-net-core-pre-fill-iformfile-with-previously-uploaded-file, 31 July 2020 at 23:35.
+[6] mt_serg, Brian Webster, https://stackoverflow.com/questions/17723276/delete-a-single-record-from-entity-framework, 18 July 2013 at 12:37 (answered), 20 February 2018 at 18:26 (edited).
