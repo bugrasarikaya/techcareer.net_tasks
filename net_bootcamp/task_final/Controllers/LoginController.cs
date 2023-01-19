@@ -17,9 +17,9 @@ namespace task_final.Controllers {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> LogIn(User user) {
+        public async Task<IActionResult> LogIn(Account account) {
             ShoppingListDbContext context = new ShoppingListDbContext();
-            var result = context.Users.FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
+            var result = context.Accounts.FirstOrDefault(a => a.AccountName == account.AccountName && a.Password == account.Password);
             context.Dispose();
             if (result != null) {
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -41,9 +41,10 @@ namespace task_final.Controllers {
             return View();
         }
         [HttpPost]
-        public IActionResult Register(User user) {
+        public IActionResult Register(Account account) {
             ShoppingListDbContext context = new ShoppingListDbContext();
-            context.Users.Add(user);
+            account.Role = "User";
+			context.Accounts.Add(account);
             context.SaveChanges();
             context.Dispose();
 

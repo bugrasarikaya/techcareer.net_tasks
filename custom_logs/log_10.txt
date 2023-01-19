@@ -1,0 +1,19 @@
+"Users" view and action were renamed as "UserList".
+Current "UserList" view was deleted and a new "UserList" was created on scaffholder with "List" template.
+"ProductAdd" view and action were renamed as "ProductCreate".
+"UserCreate", "UserDetails" and "UserDelete" actions with views, were created.
+Because of thinking that "account" word is more general than "user" word, changing "User" classes' names to "Account", was decided.
+"User" classes except controller, were renamed as "Account" and "Role" property was set as non-nullable.
+"Username" property was changed to "AccountName".
+2 webpages [1] [2] about "account" vs "user", were read briefly.
+Sixth migration was applied but after changing name "User" table, inserted records could not be found.
+An admin account was inserted on SSMS manually.
+Account roles were set as "User" in "LoginController" class for registering new accounts.
+A new account with "user and "54321" info, was registered.
+"AccountCreate", "AccountEdit" and "AccountDetails" views and actions were coded.
+"var" keywords were changed to specific types which are related to result type of query and "data_1" and "data_1" variable names were changed as lowercase of their type name.
+Some short variable names which were used in lambda expressions, were renamed to first letter of their types.
+Aplication was tested and simple bugs were fixed.
+Database was exported.
+[1] https://stackoverflow.com/questions/3648462/difference-between-user-and-account-object-in-social-network-design
+[2] https://stackoverflow.com/questions/7801404/force-com-user-vs-account-vs-role-vs-profile-vs-owner

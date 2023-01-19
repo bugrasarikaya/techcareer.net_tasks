@@ -1,14 +1,12 @@
 ﻿@model task_final.ViewModels.ProductImageSetViewModel
-
 @{
-	ViewData["Title"] = "Product Add";
+	ViewData["Title"] = "Product Create";
 }
-
 <h1>@ViewData["Title"]</h1>
 <hr />
 <div class="row">
 	<div class="col-md-4">
-		<form asp-action="ProductAdd" enctype="multipart/form-data">
+		<form asp-action="ProductCreate" enctype="multipart/form-data">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="form-group">
 				<label asp-for="ProductName" class="control-label"></label>
@@ -36,7 +34,7 @@
 				<span asp-validation-for="ImageBinary" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<input type="submit" value="Add" class="btn btn-primary" />
+				<input type="submit" value="Create" class="btn btn-primary" />
 			</div>
 		</form>
 	</div>

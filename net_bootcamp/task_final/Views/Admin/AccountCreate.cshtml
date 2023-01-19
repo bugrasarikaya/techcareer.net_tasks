@@ -1,15 +1,12 @@
 ﻿@model task_final.Models.Account
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "AccountCreate";
 }
-<h1>@ViewData["Title"]</h1>
+<h1>ViewData["Title"]</h1>
 <hr />
-<p>
-    <a asp-action="Register">Register</a>
-</p>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="LogIn">
+        <form asp-action="AccountCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="AccountName" class="control-label"></label>
@@ -22,13 +19,13 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
+                <label asp-for="Role" class="control-label"></label>
+                <input asp-for="Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
