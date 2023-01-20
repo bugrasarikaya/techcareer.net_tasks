@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using task_final.Models;
 
@@ -11,9 +12,11 @@ using task_final.Models;
 namespace taskfinal.Migrations
 {
     [DbContext(typeof(ShoppingListDbContext))]
-    partial class ShoppingListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230120015558_migration_07")]
+    partial class migration07
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,6 +106,9 @@ namespace taskfinal.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ImageID")
+                        .IsUnique();
+
                     b.ToTable("Products", (string)null);
                 });
 
@@ -118,6 +124,9 @@ namespace taskfinal.Migrations
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("varchar");
+
+                    b.Property<int?>("ShoppingProductListID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -140,17 +149,105 @@ namespace taskfinal.Migrations
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShoppingListID")
+                    b.Property<int>("ShoppingProductListID")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(20)
+                        .HasMaxLength(30)
                         .HasColumnType("varchar");
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ProductID");
+
+                    b.HasIndex("ShoppingProductListID");
+
                     b.ToTable("ShoppingProducts", (string)null);
+                });
+
+            modelBuilder.Entity("task_final.Models.ShoppingProductList", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("ShoppingListID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingProductID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ShoppingListID")
+                        .IsUnique();
+
+                    b.ToTable("ShoppingProductLists", (string)null);
+                });
+
+            modelBuilder.Entity("task_final.Models.Product", b =>
+                {
+                    b.HasOne("task_final.Models.Image", "Image")
+                        .WithOne("Product")
+                        .HasForeignKey("task_final.Models.Product", "ImageID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Image");
+                });
+
+            modelBuilder.Entity("task_final.Models.ShoppingProduct", b =>
+                {
+                    b.HasOne("task_final.Models.Product", "Product")
+                        .WithMany("ShoppingProducts")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("task_final.Models.ShoppingProductList", "ShoppingProductList")
+                        .WithMany("ShoppingProducts")
+                        .HasForeignKey("ShoppingProductListID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("ShoppingProductList");
+                });
+
+            modelBuilder.Entity("task_final.Models.ShoppingProductList", b =>
+                {
+                    b.HasOne("task_final.Models.ShoppingList", "ShoppingList")
+                        .WithOne("ShoppingProductList")
+                        .HasForeignKey("task_final.Models.ShoppingProductList", "ShoppingListID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ShoppingList");
+                });
+
+            modelBuilder.Entity("task_final.Models.Image", b =>
+                {
+                    b.Navigation("Product")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("task_final.Models.Product", b =>
+                {
+                    b.Navigation("ShoppingProducts");
+                });
+
+            modelBuilder.Entity("task_final.Models.ShoppingList", b =>
+                {
+                    b.Navigation("ShoppingProductList");
+                });
+
+            modelBuilder.Entity("task_final.Models.ShoppingProductList", b =>
+                {
+                    b.Navigation("ShoppingProducts");
                 });
 #pragma warning restore 612, 618
         }

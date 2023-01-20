@@ -1,0 +1,57 @@
+﻿@model IEnumerable<task_final.ViewModels.ProductImageGetViewModel>
+@{
+	ViewData["Title"] = "Products";
+}
+<h1>@ViewData["Title"]</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductCategory)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductDescription)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductPrice)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ImageSource)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model) {
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductCategory)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductDescription)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductPrice)
+				</td>
+				<td>
+					<img src="@Html.DisplayFor(modelItem => item.ImageSource)" height="200" />
+				</td>
+				<td>
+					<partial name="_ShoppingListProductIDViewModel" model='new ShoppingListProductIDViewModel { ShoppingListID = (int)ViewData["ShoppingListID"]!, ProductID = item.ProductID}'>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

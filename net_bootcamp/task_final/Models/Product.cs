@@ -6,6 +6,7 @@
         public int ImageID { get; set; }
         public string? Description { get; set; }
         public double? Price { get; set; }
-        public Image Image { get; set; } = null!;
-    }
+        //public Image Image { get; set; } = null!;
+		//public ShoppingProduct? ShoppingProduct { get; set; }
+	}
 }

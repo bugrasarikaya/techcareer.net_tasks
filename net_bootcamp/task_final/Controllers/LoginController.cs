@@ -19,7 +19,7 @@ namespace task_final.Controllers {
         [HttpPost]
         public async Task<IActionResult> LogIn(Account account) {
             ShoppingListDbContext context = new ShoppingListDbContext();
-            var result = context.Accounts.FirstOrDefault(a => a.AccountName == account.AccountName && a.Password == account.Password);
+            var result = context.Accounts.FirstOrDefault(a => a.Name == account.Name && a.Password == account.Password);
             context.Dispose();
             if (result != null) {
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);

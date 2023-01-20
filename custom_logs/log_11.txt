@@ -1,0 +1,59 @@
+"ShoppingList", "ShoppingProductList" and "ShoppingProduct" models were created.
+Examined webpages [1] [2] [3] ,were examined again for remembering EF Core relationships.
+A webpage [4] about "ICollection<T>" and "List<T>", was read and it was learnt that "ICollection<T>" is more general.
+Although there are both "ICollection<T>" and "List<T>" usages in an official document [2], "ICollection<T>" was used in relationships of current application because its more general.
+Meaning of "entity", which is like class, was remembered in seventh lecture record."
+"AccountName" column was renamed as "Name".
+CS0308 error occurred while trying to write a many-to-one relationship between "ShoppingProductList" and "ShoppingProduct" and it was resolved by changing relationship direction.
+A new property whose type is "ICollection<ShoppingProduct>?" was added to "Product" model for making a relationship with "ShoppingProduct" class and "ProductConfiguration" class was updated.
+After aplying "ShoppingListConfiguration", "ShoppingProductListConfiguration" and "ShoppingProductConfiguration" configuration classes, seventh migration was implemented but an unintended relationship which is like that both two tables has foreign key, was occured.
+Unintended relationship was fixed by editing "ShoppingListConfiguration" class.
+"update-database migration_07> command which is found in a webpage [5] was used to revert database and then seventh migration was removed.
+A new seventh migration was applied but inintended relationship continued to exist and it was ignored.
+"Shopping" actions and views were started to be created.
+Actions' locations in controller, were changed as alphabetical order.
+"RemoveRange" method was found in a webpage [6] and it was used for removing multiple rows.
+It was observed that "Remove" and "RemoveRange" methods did not give an error while requesting to delete row which are not exists.
+"ShoppingProduct" model with its configurations, was removed because it was considered unnecessary.
+A webpage [7] was read briefly for learning possibility of a relationship which is among two tables both referring one another.
+CS1061 error was occured while trying to make many-to-many relationship.
+Error could not be resolved and relationship was changed to one-to-many relationship.
+Eighth migration was applied.
+On SSMS diagram, it was observed that all relationship lines have two yellow keys and it was ignored.
+"ShoppingListProductImageViewModel" ViewModel was created.
+2 webpagse [8] [9] and fifth lecture record were examined for remembering difference between "ViewData", "ViewBag", "TempData".
+"FormCollection" type was found in a webpage [10] and it was considered to be used for trying to post different data like different model, with HTML form.
+"ShoppingListProductImageViewModel" class was renamed as "ShoppingListProductViewModel" and its properties were reduced to store only primary key values of "ShoppingList" and "Product" models.
+"ProductList" view was copied and renamed as "ShoppingProductAdd".
+Instead of using an HTML link, a form which has two hidden inputs, was used to post "ShoppingListProductViewModel" values in "ShoppingProductAdd" view and "ShoppingListID" value was obtained from ViewData.
+"ShoppingProductListID" property in "ShoppingList" model was removed.
+"ShoppingProductList" model was renamed as "ShoppingProduct".
+Changed models' configurations were edited and ninenth migration was applied.
+"ShoppingListProductViewModel" class was renamed as "ShoppingListProductIDViewModel" and a new "ShoppingListProductViewModel" class was created to store necessary properties of "ShoppingList", "ShoppingProduct" and "Product" models.
+After getting setting "ShoppingListProductViewModel" values with LINQ operations, "ShoppingListDetails" view was re-created by using scoffholder with "List" template.
+"First" method which gets first element of IEnumerable model, was found in a webpage [11].
+An implementation for posting a form with different model, did not worked.
+Using partial view, method was tried by benefiting a document [12].
+CS8605 warning occured while assigning and unboxing ViewData value in creating a model and it was resolved adding a null-forgiving operator by benefiting a document [13].
+Partial view method worked and a new product was added into shopping list but "ShoppingListDetails" view became inaccessible because of an Entity Framework error which is about duplicate key.
+To resolve previous problem relationship lines were commented and tenth migration was applied.
+For using "RedirectToAction" method with paramater, an anonymous object was created and used by benefiting a webpage [14].
+An error occured in an implementation of "RemoveRange" and "Select" methods and it was resolved by using "Where" method which was found in a webpage [15].
+An "if-else" statement was added into "_ShoppingListProductIDViewModel" partial view for using it in different views but then it was commented because a simpler method which is using link tag helper, was used.
+Deleting operations was coded successfully.
+Database was exported.
+[1] https://www.entityframeworktutorial.net/code-first/configure-one-to-many-relationship-in-code-first.aspx
+[2] https://learn.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key, 01/12/2023.
+[3] Marinko Spasojevic, https://code-maze.com/efcore-relationships/, 13 January 2022.
+[4] danego61, https://gelecegiyazanlar.turkcell.com.tr/soru/list-ve-icollection-arasindaki-fark-nedir, 19.11.2021 at 02:56.
+[5] adem caglin, Community (Bot), https://stackoverflow.com/questions/38192450/how-to-unapply-a-migration-in-asp-net-core-with-ef-core, 5 Jul 2016 at 7:44 (answered), 12 Aug 2019 at 4:08 (edited).
+[6] steamrolla, Community (Bot), https://stackoverflow.com/questions/41960215/how-do-i-delete-multiple-rows-in-entity-framework-core, answered 3 February 2017 at 15:06, 23 May 2017 at 12:10 (edited).
+[7] https://stackoverflow.com/questions/11273295/two-tables-each-with-a-foreign-key-referencing-the-other
+[8] https://stackoverflow.com/questions/23677456/how-to-pass-value-from-one-action-to-another-action-having-same-controller
+[9] Jignesh Trivedi, https://www.c-sharpcorner.com/UploadFile/ff2f08/multiple-models-in-single-view-in-mvc/, 24 Jun 2021.
+[10] Alex, https://stackoverflow.com/questions/15094054/posting-to-another-model-from-a-form-in-asp-net-mvc, 26 February 2013 at 17:32.
+[11] Erik Forbes, Community (Bot), https://stackoverflow.com/questions/497261/how-do-i-get-the-first-element-from-an-ienumerablet-in-net, 30 January 2009 at 21:13 (answered), 23 May 2017 at 11:47 (edited).
+[12] Scott Addie, https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/partial-tag-helper?view=aspnetcore-7.0, 06/04/2022.
+[13] https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/nullable-warnings#possible-null-assigned-to-a-nonnullable-reference, 11/15/2022.
+[14] https://stackoverflow.com/questions/1257482/redirecttoaction-with-parameter
+[15] David, https://stackoverflow.com/questions/870216/best-way-to-delete-multiple-records-in-a-linq-query, 11 May 2013 at 9:08.

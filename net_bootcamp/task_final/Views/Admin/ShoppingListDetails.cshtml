@@ -1,0 +1,82 @@
+﻿@model IEnumerable<task_final.ViewModels.ShoppingListProductViewModel>
+@{
+	ViewData["Title"] = "ShoppingListDetails";
+}
+<h1>@ViewData["Title"]</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.ShoppingProductID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ShoppingProductStatus)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ShoppingListID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ShoppingListName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ShoppingListStatus)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductCategory)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductDescription)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductPrice)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model) {
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.ShoppingProductID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ShoppingProductStatus)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ShoppingListID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ShoppingListName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ShoppingListStatus)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductCategory)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductDescription)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductPrice)
+				</td>
+				<td>
+					<a asp-action="ShoppingProductDelete" asp-route-id="@item.ShoppingProductID">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<a asp-action="ShoppingProductAdd" asp-route-id="@ViewData["ShoppingListID"]">Add Product</a>
