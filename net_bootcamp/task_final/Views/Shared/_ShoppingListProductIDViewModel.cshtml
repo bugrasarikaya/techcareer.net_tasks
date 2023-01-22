@@ -1,8 +1,6 @@
 ﻿@model task_final.ViewModels.ShoppingListProductIDViewModel
 @{
 	Layout = null;
-	//if (ViewContext.RouteData.Values["action"]?.ToString() == "ShoppingProductAdd") ViewData["action"] = "ShoppingProductAdd";
-	//else if (ViewContext.RouteData.Values["action"]?.ToString() == "ShoppingListDetails") ViewData["action"] = "ShoppingProductDelete";
 }
 <form asp-action="ShoppingProductAdd">
 	<input asp-for=@Model.ShoppingListID type="hidden" />

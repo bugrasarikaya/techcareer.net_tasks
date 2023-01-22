@@ -2,48 +2,52 @@
 @{
 	ViewData["Title"] = "Account List";
 }
-<h1>@ViewData["Title"]</h1>
 <p>
 	<a asp-action="AccountCreate">Create New</a>
 </p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.ID)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Name)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Password)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Role)
-			</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model) {
+@if (Model.Count() == 0) {
+	<partial name="_EmptyList" />
+} else {
+	<h1>@ViewData["Title"]</h1>
+	<table class="table">
+		<thead>
 			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.ID)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Name)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Password)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Role)
-				</td>
-				<td>
-					<a asp-action="AccountDetails" asp-route-id="@item.ID">Details</a>
-					<a asp-action="AccountDelete" asp-route-id="@item.ID">Delete</a>
-				</td>
+				<th>
+					@Html.DisplayNameFor(model => model.ID)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Name)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Password)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Role)
+				</th>
+				<th></th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@foreach (var item in Model) {
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.ID)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Name)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Password)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Role)
+					</td>
+					<td>
+						<a asp-action="AccountDetails" asp-route-id="@item.ID">Details</a>
+						<a asp-action="AccountDelete" asp-route-id="@item.ID">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

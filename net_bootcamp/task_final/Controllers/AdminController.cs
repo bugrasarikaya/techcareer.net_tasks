@@ -122,7 +122,7 @@ namespace task_final.Controllers {
 		public IActionResult ProductCreate() {
 			ShoppingListDbContext context = new ShoppingListDbContext();
 			ProductImageSetViewModel product_image = new ProductImageSetViewModel();
-			product_image.Categories = new List<SelectListItem> { new SelectListItem { Text = "", Value = null } };
+			product_image.Categories = new List<SelectListItem> { new SelectListItem { Text = "All", Value = "0" } };
 			foreach (Category category in context.Categories.Select(a => new Category() { ID = a.ID, Name = a.Name }).ToList()) product_image.Categories.Add(new SelectListItem { Text = category.Name, Value = category.ID.ToString() });
 			return View(product_image);
 		}
@@ -197,11 +197,11 @@ namespace task_final.Controllers {
 		public IActionResult ProductList(string category_id) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
 			CategoryDropdownViewModel category_dropdown = new CategoryDropdownViewModel();
-			category_dropdown.Categories = new List<SelectListItem> { new SelectListItem { Text = "", Value = null } };
-			foreach (Category category in context.Categories.Select(a => new Category() { ID = a.ID, Name = a.Name }).ToList()) category_dropdown.Categories.Add(new SelectListItem { Text = category.Name, Value = category.ID.ToString() });
+			category_dropdown.Categories = new List<SelectListItem> { new SelectListItem { Text = "All", Value = "0" } };
+			foreach (Category category in context.Categories.Select(a => new Category() { ID = a.ID, Name = a.Name }).ToList()) category_dropdown.Categories.Add(new SelectListItem { Text = category.Name, Value = category.ID.ToString(), Selected = category_id == category.ID.ToString() ? true : false });
 			ViewData["CategoryDropdownViewModel"] = category_dropdown.Categories;
 			ProductImageGetViewModel product_image_get_view_model = new ProductImageGetViewModel();
-			List<Product> list_product = context.Products.Where(p => p.CategoryID == (category_id == null ? p.CategoryID : int.Parse(category_id))).ToList();
+			List<Product> list_product = context.Products.Where(p => p.CategoryID == ((category_id == "0" || category_id == null) ? p.CategoryID : int.Parse(category_id))).ToList();
 			List<ProductImageGetViewModel> list_product_image = new List<ProductImageGetViewModel>();
 			foreach (Product product in list_product) {
 				Image image = context.Images.Single(i => i.ID == product.ImageID);
@@ -241,13 +241,17 @@ namespace task_final.Controllers {
 			ViewData["ShoppingListID"] = id;
 			ShoppingListDbContext context = new ShoppingListDbContext();
 			List<ShoppingListProductViewModel> list_shopping_list_product = new List<ShoppingListProductViewModel>();
-			ShoppingList shopping_list;
+			ShoppingList shopping_list = context.ShoppingLists.Single(sl => sl.ID == id);
 			Product product;
-			List<ShoppingProduct> list_shopping_product = context.ShoppingProducts.Select(sp => sp).ToList();
+			List<ShoppingProduct> list_shopping_product = context.ShoppingProducts.Where(sp => sp.ShoppingListID == id).ToList();
+			List<SelectListItem> list_select_list_item = new List<SelectListItem>() {
+				new SelectListItem () {Text = "Not Purchased", Value = "Not Purchased"},
+				new SelectListItem () {Text = "Purchased", Value = "Purchased"},
+			};
 			foreach (ShoppingProduct shopping_product in list_shopping_product) {
-				shopping_list = context.ShoppingLists.Single(sl => sl.ID == id);
 				product = context.Products.Single(p => p.ID == shopping_product.ProductID);
-				list_shopping_list_product.Add(new ShoppingListProductViewModel() { ShoppingProductID = shopping_product.ID, ShoppingProductStatus = shopping_product.Status, ShoppingListID = id, ShoppingListName = shopping_list.Name, ShoppingListStatus = shopping_list.Status, ProductID = shopping_product.ProductID, ProductName = product.Name, ShoppingProductQuantity = shopping_product.Quantity, ShoppingProductTotalPrice = shopping_product.TotalPrice });
+				foreach (SelectListItem select_list_item in list_select_list_item) select_list_item.Selected = (select_list_item.Text == shopping_product.Status) ? true : false;
+				list_shopping_list_product.Add(new ShoppingListProductViewModel() { ShoppingProductID = shopping_product.ID, ShoppingProductStatus = shopping_product.Status, ShoppingProductStatuses = list_select_list_item, ShoppingListID = id, ShoppingListName = shopping_list.Name, ShoppingListStatus = shopping_list.Status, ProductID = shopping_product.ProductID, ProductName = product.Name, ShoppingProductQuantity = shopping_product.Quantity, ShoppingProductTotalPrice = shopping_product.TotalPrice });
 			}
 			context.Dispose();
 			return View(list_shopping_list_product);
@@ -301,12 +305,12 @@ namespace task_final.Controllers {
 		public IActionResult ShoppingProductAdd(int id, string category_id) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
 			CategoryDropdownViewModel category_dropdown = new CategoryDropdownViewModel();
-			category_dropdown.Categories = new List<SelectListItem> { new SelectListItem { Text = "", Value = null } };
+			category_dropdown.Categories = new List<SelectListItem> { new SelectListItem { Text = "All", Value = "0" } };
 			foreach (Category category in context.Categories.Select(a => new Category() { ID = a.ID, Name = a.Name }).ToList()) category_dropdown.Categories.Add(new SelectListItem { Text = category.Name, Value = category.ID.ToString() });
 			ViewData["CategoryDropdownViewModel"] = category_dropdown.Categories;
 			ViewData["ShoppingListID"] = id;
 			ProductImageGetViewModel product_image_get_view_model = new ProductImageGetViewModel();
-			List<Product> list_product = context.Products.Where(p => p.CategoryID == (category_id == null ? p.CategoryID : int.Parse(category_id))).ToList();
+			List<Product> list_product = context.Products.Where(p => p.CategoryID == ((category_id == "0" || category_id == null) ? p.CategoryID : int.Parse(category_id))).ToList();
 			List<ProductImageGetViewModel> list_product_image = new List<ProductImageGetViewModel>();
 			foreach (Product product in list_product) {
 				Image image = context.Images.Single(i => i.ID == product.ImageID);
@@ -352,35 +356,31 @@ namespace task_final.Controllers {
 			context.Dispose();
 			return RedirectToAction("ShoppingListDetails", new { id = shopping_product_1.ShoppingListID });
 		}
-		[HttpGet]
-		public IActionResult ShoppingProductEdit(int id) {
-			ShoppingListDbContext context = new ShoppingListDbContext();
-			ShoppingProduct shopping_product = context.ShoppingProducts.Single(sp => sp.ID == id);
-			List<SelectListItem> list_select_list_item = new List<SelectListItem>() {
-				new SelectListItem () {Text = "Not Purchased", Value = "Not Purchased"},
-				new SelectListItem () {Text = "Purchased", Value = "Purchased"},
-			};
-			foreach (SelectListItem select_list_item in list_select_list_item) select_list_item.Selected = (select_list_item.Text == shopping_product.Status) ? true : false;
-			context.Dispose();
-			return View(new ShoppingProductEditViewModel() { ID = id, Quantity = shopping_product.Quantity, StatusName = shopping_product.Status, Statuses = list_select_list_item });
+		[HttpPost]
+		public IActionResult ShoppingProductFilterCategory(CategoryDropdownViewModel category_dropdown) {
+			return RedirectToAction("ShoppingProductAdd", new { id = category_dropdown.ShoppingListID, category_id = category_dropdown.CategoryID });
 		}
 		[HttpPost]
-		public IActionResult ShoppingProductEdit(ShoppingProductEditViewModel shopping_product_edit) {
+		public IActionResult ShoppingProductQuantity(ShoppingProductQuantityViewModel shopping_product_quantity) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
-			ShoppingProduct shopping_product_1 = context.ShoppingProducts.Single(sp => sp.ID == shopping_product_edit.ID);
-			shopping_product_1.Quantity = shopping_product_edit.Quantity;
-			shopping_product_1.Status = shopping_product_edit.StatusName;
-			shopping_product_1.TotalPrice = context.Products.Single(p => p.ID == shopping_product_1.ProductID).Price * shopping_product_1.Quantity;
-			ShoppingList shopping_list = context.ShoppingLists.Single(sp => sp.ID == shopping_product_1.ShoppingListID);
+			ShoppingProduct shopping_product = context.ShoppingProducts.Single(sp => sp.ID == shopping_product_quantity.ShoppingProudctID);
+			shopping_product.Quantity = shopping_product_quantity.Quantity;
+			shopping_product.TotalPrice = context.Products.Single(p => p.ID == shopping_product.ProductID).Price * shopping_product.Quantity;
+			ShoppingList shopping_list = context.ShoppingLists.Single(sp => sp.ID == shopping_product.ShoppingListID);
 			shopping_list.TotalCost = 0;
 			foreach (ShoppingProduct shopping_product_2 in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) shopping_list.TotalCost += shopping_product_2.TotalPrice;
 			context.SaveChanges();
 			context.Dispose();
-			return RedirectToAction("ShoppingListDetails", new { id = shopping_product_1.ShoppingListID });
+			return RedirectToAction("ShoppingListDetails", new { id = shopping_product.ShoppingListID });
 		}
 		[HttpPost]
-		public IActionResult ShoppingProductFilterCategory(CategoryDropdownViewModel category_dropdown) {
-			return RedirectToAction("ShoppingProductAdd", new { id = category_dropdown.ShoppingListID, category_id = category_dropdown.CategoryID });
+		public IActionResult ShoppingProductStatus(ShoppingProductStatusViewModel shopping_product_status) {
+			ShoppingListDbContext context = new ShoppingListDbContext();
+			ShoppingProduct shopping_product = context.ShoppingProducts.Single(sp => sp.ID == shopping_product_status.ShoppingProudctID);
+			shopping_product.Status = shopping_product_status.StatusName;
+			context.SaveChanges();
+			context.Dispose();
+			return RedirectToAction("ShoppingListDetails", new { id = shopping_product.ShoppingListID });
 		}
 		[HttpGet]
 		public async Task<IActionResult> LogOut() {

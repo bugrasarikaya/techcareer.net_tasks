@@ -2,14 +2,13 @@
 @{
 	ViewData["Title"] = "Products";
 }
-<a asp-action="ProductCreate">Create Product</a>
+<p>
+	<partial name="_CategoryDropdownViewModel" model='new CategoryDropdownViewModel { ShoppingListID = (int)ViewData["ShoppingListID"]!, Categories = (List<SelectListItem>)ViewData["CategoryDropdownViewModel"]!}' />
+</p>
 @if (Model.Count() == 0) {
 	<partial name="_EmptyList" />
 } else {
 	<h1>@ViewData["Title"]</h1>
-	<p>
-		<partial name="_CategoryDropdownViewModel" model='new CategoryDropdownViewModel { Categories = (List<SelectListItem>)ViewData["CategoryDropdownViewModel"]!}' />
-	</p>
 	<table class="table">
 		<thead>
 			<tr>
@@ -56,8 +55,7 @@
 						<img src="@Html.DisplayFor(modelItem => item.ImageSource)" height="200" />
 					</td>
 					<td>
-						<a asp-action="ProductDetails" asp-route-id="@item.ProductID">Details</a>
-						<a asp-action="ProductDelete" asp-route-id="@item.ProductID">Delete</a>
+						<partial name="_ShoppingListProductIDViewModel" model='new ShoppingListProductIDViewModel { ShoppingListID = (int)ViewData["ShoppingListID"]!, ProductID = item.ProductID}' />
 					</td>
 				</tr>
 			}

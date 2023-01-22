@@ -1,0 +1,10 @@
+﻿@{
+	if (ViewContext.RouteData.Values["action"]?.ToString() == "AccountList") ViewData["list"] = "Account";
+	else if (ViewContext.RouteData.Values["action"]?.ToString() == "CategoryList") ViewData["list"] = "Category";
+	else if (ViewContext.RouteData.Values["action"]?.ToString() == "ProductList") ViewData["list"] = "Product";
+	else if (ViewContext.RouteData.Values["action"]?.ToString() == "ShoppingListList") ViewData["list"] = "Shopping list";
+	else if (ViewContext.RouteData.Values["action"]?.ToString() == "ShoppingListDetails") ViewData["list"] = "Shopping product";
+	else if (ViewContext.RouteData.Values["action"]?.ToString() == "ShoppingProductAdd") ViewData["list"] = "Product";
+	Layout = null;
+}
+<h2>@ViewData["list"] could not found.</h2>

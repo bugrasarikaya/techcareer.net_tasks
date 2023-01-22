@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -24,12 +25,14 @@ namespace task_final.Controllers {
             if (result != null) {
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 if (result.Role == "Admin") {
-                    identity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
+                    HttpContext.Session.SetInt32("account_id", result.ID);
+					identity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
                     return RedirectToAction("Main", "Admin");
                 }
                 else if(result.Role == "User") {
-                    identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
+					HttpContext.Session.SetInt32("account_id", result.ID);
+					identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
                     return RedirectToAction("Main", "User");
                 }

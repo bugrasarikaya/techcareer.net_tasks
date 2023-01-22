@@ -1,8 +1,10 @@
-﻿namespace task_final.ViewModels {
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+namespace task_final.ViewModels {
 	public class ShoppingListProductViewModel {
 		public int ShoppingProductID { get; set; }
 		public string ShoppingProductStatus { get; set; } = null!;
-		public double ShoppingProductQuantity { get; set; }
+		public List<SelectListItem> ShoppingProductStatuses { get; set; } = null!;
+		public int ShoppingProductQuantity { get; set; }
 		public double ShoppingProductTotalPrice { get; set; }
 		public int ShoppingListID { get; set; }
 		public string ShoppingListName { get; set; } = null!;

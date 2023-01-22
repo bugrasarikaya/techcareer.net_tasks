@@ -2,62 +2,63 @@
 @{
 	ViewData["Title"] = "ShoppingListDetails";
 }
-<h1>@ViewData["Title"]</h1>
 <div>
 	<a asp-action="ShoppingProductAdd" asp-route-id="@ViewData["ShoppingListID"]">Add Product</a>
 </div>
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.ShoppingProductID)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ShoppingProductStatus)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ProductID)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ProductName)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ShoppingProductQuantity)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ShoppingProductTotalPrice)
-			</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model) {
+@if (Model.Count() == 0) {
+	<partial name="_EmptyList" />
+} else {
+	<h1>@ViewData["Title"]</h1>
+	<table class="table">
+		<thead>
 			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.ShoppingProductID)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ShoppingProductStatus)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ProductID)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ProductName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ShoppingProductQuantity)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ShoppingProductTotalPrice)
-				</td>
-				<td>
-					<a asp-action="ShoppingProductEdit" asp-route-id="@item.ShoppingProductID">Edit</a>
-				</td>
-				<td>
-					<a asp-action="ShoppingProductDelete" asp-route-id="@item.ShoppingProductID">Delete</a>
-				</td>
+				<th>
+					@Html.DisplayNameFor(model => model.ShoppingProductID)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ShoppingProductStatus)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ProductID)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ProductName)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ShoppingProductQuantity)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ShoppingProductTotalPrice)
+				</th>
+				<th></th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@foreach (var item in Model) {
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.ShoppingProductID)
+					</td>
+					<td>
+						<partial name="_ShoppingProductStatusViewModel" model='new ShoppingProductStatusViewModel { ShoppingProudctID = item.ShoppingProductID, StatusName = item.ShoppingProductStatus, Statuses = item.ShoppingProductStatuses}' />
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ProductID)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ProductName)
+					</td>
+					<td>
+						<partial name="_ShoppingProductQuantityViewModel" model='new ShoppingProductQuantityViewModel { ShoppingProudctID = item.ShoppingProductID, Quantity = item.ShoppingProductQuantity}' />
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ShoppingProductTotalPrice)
+					</td>
+					<td>
+						<a asp-action="ShoppingProductDelete" asp-route-id="@item.ShoppingProductID">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

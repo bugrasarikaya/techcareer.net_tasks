@@ -1,0 +1,34 @@
+By benefiting a document [1], session feature was used for obtaining which user access to application in user controller.
+"Clear" method which was found in a webpage [2], was used for clear session.
+"Main" hyperlink was removed from navigation bar because application title is already able to open the main page.
+Process of creating different actions and view implementation, was started.
+To get session value, explicit convertion was applied and null-forgivin operator was added.
+Thanks to 4 [3] [4] [5] [6] webpages, quantity form was submitted on changing.
+"min" HTML attribute, was used for setting minimum value of shopping product input.
+"ShoppingProductQuantity" actions was added to both "admin" and "user" controllers for changing quantity.
+"ShoppingProductStatuses" property whose type is "List<SelectListItem>", was added into "ShoppingListProductViewModel" class, for editing property status on details page.
+"ShoppingProductStatus" action with related a view, was added to "admin" controller.
+"SubmitForm()" script function was changed to "SubmitForm(from)" function by adding a parameter like in examined webpage [5] because it was understood that first parameterless function submit second form incorrectly.
+"ID" properties of "ShoppingProductQuantityViewModel and "ShoppingProductStatusViewModel" ViewModels, were changed to "ShoppingProudctID" because when trying to get "ID" value of shopping product, application got "ID" of shopping list
+A bug which have occurred in "ShoppingListDetails" action, was resolved by fixing LINQ statement.
+"ShoppingProductEdit" views, actions and models were deleted because they were not needed after adding sensitive input script.
+Sensitive input script was added to product filtering.
+A bug was detected on checking posted category value from drop-down list and it was resolved after changing null category value to "0" and adding one more condition to ternary operator.
+Account page was added to "User" controller.
+In a view, written partial tag gave an error after surrounding it by curly brackets and it was resolved by adding slash character to end of partial tag, after examinin a document [7].
+While checking ViewData content in a view, CS0252 warning occured and for resolving, "ToString" method was used.
+A feature which checks shopping products, was added for completing shopping and result was stored in ViewData.
+Stored ViewData was checked after conversion with "(bool)" statement because any method for converting ViewData value to "bool" could not be found.
+"(string)" statement was used instead of "ToString" method because conversion methods were wanted to be same in view.
+"ShoppingListComplete" action was added.
+All shopping status functions were completed.
+"_EmptyList" view was created for directing a info page if requested list is empty.
+Database was exported.
+"User" controller was nearly completed.
+[1] https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-7.0, 01/18/2023
+[2] Chintan, BryanH, https://stackoverflow.com/questions/8971625/how-to-remove-specific-session-in-asp-net, 23 Jan 2012 at 12:30 (asked), 19 Feb 2013 at 21:19 (edited).
+[3] Karthik Chintala, https://stackoverflow.com/questions/14155672/submit-form-on-change-of-dropdown, 4 January 2013 at 10:54.
+[4] https://stackoverflow.com/questions/58010609/select-element-onchange-event-is-not-firing-in-asp-net-mvc-core-2-2-javascript
+[5] bugrasarikaya, https://github.com/bugrasarikaya/sale_receipt/blob/870dedaf3cc60bed621c92a51bee219286c6c0ff/cart.php, 4 September 2021.
+[6] Murat Yücedağ, https://youtu.be/l5tzyCO8BZU, 22 September 2020.
+[7] Steve Smith, Maher JENDOUBI, Rick Anderson, Scott Sauber, https://learn.microsoft.com/en-us/aspnet/core/mvc/views/partial?view=aspnetcore-7.0, 06/04/2022.
