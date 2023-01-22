@@ -1,4 +1,4 @@
-﻿@model task_final.ViewModels.ProductImageViewModel
+﻿@model task_final.ViewModels.ProductImageDetailsViewModel
 @{
 	ViewData["Title"] = "ProductEdit";
 }
@@ -10,15 +10,16 @@
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<input asp-for="ProductID" type="hidden" />
 			<input asp-for="ImageID" type="hidden" />
+			<input asp-for="CategoryName" type="hidden" />
 			<div class="form-group">
 				<label asp-for="ProductName" class="control-label"></label>
 				<input asp-for="ProductName" class="form-control" />
 				<span asp-validation-for="ProductName" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="ProductCategory" class="control-label"></label>
-				<input asp-for="ProductCategory" class="form-control" />
-				<span asp-validation-for="ProductCategory" class="text-danger"></span>
+				<label asp-for="CategoryID" class="control-label"></label>
+				<select asp-for="CategoryID" asp-items="Model.Categories"></select>
+				<span asp-validation-for="CategoryID" class="text-danger"></span>
 			</div>
 			<div class="form-group">
 				<label asp-for="ProductDescription" class="control-label"></label>
@@ -45,4 +46,8 @@
 		</form>
 	</div>
 </div>
-
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

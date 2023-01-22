@@ -1,4 +1,4 @@
-﻿@model IEnumerable<task_final.Models.ShoppingList>
+﻿@model IEnumerable<task_final.ViewModels.ShoppingListListViewModel>
 @{
 	ViewData["Title"] = "ShoppingListList";
 }
@@ -17,6 +17,15 @@
 				@Html.DisplayNameFor(model => model.Name)
 			</th>
 			<th>
+				@Html.DisplayNameFor(model => model.AccountID)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.AccountName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TotalCost)
+			</th>
+			<th>
 				@Html.DisplayNameFor(model => model.Status)
 			</th>
 			<th></th>
@@ -32,10 +41,20 @@
 					@Html.DisplayFor(modelItem => item.Name)
 				</td>
 				<td>
+					@Html.DisplayFor(modelItem => item.AccountID)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.AccountName)
+				</td>
+				<th>
+					@Html.DisplayFor(model => item.TotalCost)
+				</th>
+				<td>
 					@Html.DisplayFor(modelItem => item.Status)
 				</td>
 				<td>
 					<a asp-action="ShoppingListDetails" asp-route-id="@item.ID">Details</a>
+					<a asp-action="ShoppingListEdit" asp-route-id="@item.ID">Edit</a>
 					<a asp-action="ShoppingListDelete" asp-route-id="@item.ID">Delete</a>
 				</td>
 			</tr>

@@ -1,4 +1,4 @@
-﻿@model task_final.ViewModels.ProductImageViewModel
+﻿@model task_final.ViewModels.ProductImageDetailsViewModel
 @{
 	ViewData["Title"] = "Details";
 }
@@ -20,10 +20,10 @@
 			@Html.DisplayFor(model => model.ProductName)
 		</dd>
 		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.ProductCategory)
+			@Html.DisplayNameFor(model => model.CategoryName)
 		</dt>
 		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.ProductCategory)
+			@Html.DisplayFor(model => model.CategoryName)
 		</dd>
 		<dt class="col-sm-2">
 			@Html.DisplayNameFor(model => model.ProductDescription)

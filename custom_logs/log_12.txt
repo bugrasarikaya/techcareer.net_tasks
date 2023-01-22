@@ -1,0 +1,50 @@
+"Category" class with its configurations, was created for database and eleventh migrations was implemented.
+"Category" actions and views were coded.
+"Category" property was changed to "CategoryID" and twelfth migrations was implemented.,
+By benefiting 3 webpages [1] [2] [3], a dropdown list was implementen on category selection "SelectList" could not be used and "SelectListItem"  was used.
+Some model view properties were changed.
+Thanks to renaming (refactoring) feature of Visual Studio, changed properties made less errors and they were fixed.
+While implementing filter feature for categories, it was noticed that some creation views cannot validate input and it was resolved by adding missing script which was found in "Main" view.
+A casting method was found in a webpage [4] and it was used for casting ViewData value to "List<SelectListItem>".
+An implementation of "Where" method, was benefited from a webpage [5].
+A dropdown list implementation for filtering products, was added.
+"ProductImageViewModel" model was renamed to "ProductImageDetailsViewModel" and new properties were added to use dropdown list.
+"Selected" property of "SelectListItem", was learnt in a webpage [6] and it was used for settting default category name, in action.
+It was noticed that turning off method for just one input, was not working and it was resolved by makin property nullable in model.
+Process of adding product filtering feature, was completed on "ShoppingProductAdd" and "ProductList" views.
+"Quantity" property was added to "ShoppingProduct" model.
+Nullable status of price, was changed.
+"TotalPrice" property was added to "ShoppingList" model.
+After editing configurations, thirteenth migration was applied.
+"TotalPrice" property of ShoppingList" model, was renamed to "TotalCost" and "TotalPrice" property was added to "ShoppingProduct" model.
+After editing configurations, fourteenth migration was applied.
+Because of CA1829 warning, "Count" was used instead of "Count" method while checking a "Select" operation's result.
+A webpage [7] was read briefly for learning difference between "First" and "Single" methods.
+Deleting feature was set to decrease quantity if quantity is bigger than one.
+Some code lines were written for updating "TotalPrice" value of "ShoppingProducts" and "TotalCost" value of "ShoppingLists" table after changing product's price.
+Previous updating feature was added into adding "ShoppingProductAdd" and "ShoppingProductDelete" actions.
+8 webpages [8] [9] [10] [11] [12] [13] [14] were examined for using enum class but it was not used.
+"ShoppingListEdit" actions and views were created.
+Status feature was added for shopping lists.
+"ShoppingProduct" actions and views were created.
+"Delete" link of "ShoppingProduct", had a decreasing feature for quantity but it was removed because feature was moved to editing view of "ShoppingProduct".
+"UserID" column was added to "ShoppingList" model and fifteenth migration was applied.
+"SaveChanges" method was used multiple times in action because it was observed that "Add" method did not update database object in backend before using "SaveChanges" method.
+New ViewModels were created.
+A drop-down list was added to account section.
+Coding process of admin controller, was nearly completed because there are some style issues.
+Database was exported.
+[1] Shyju, MarcusOtter, https://stackoverflow.com/questions/34624034/select-tag-helper-in-asp-net-core-mvc, 6 Jan 2016 at 1:28 (answered), 23 October 2021 at 16:20 (edited).
+[2] https://www.learnrazorpages.com/razor-pages/forms/select-lists, 01/08/2021 07:46:04
+[3] Rick Anderson, N. Taylor Mullen, Dave Paquette, Jerrie Pelser, https://learn.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-7.0, 10/29/2022.
+[4] User-271186128, https://social.msdn.microsoft.com/Forums/en-US/96810014-da96-4839-aa4f-028072ebd3b7/cannot-convert-from-object-to-selectlistitemi?forum=aspmvc, 11 May 2016 3:26 AM.
+[5] https://www.entityframeworktutorial.net/efcore/querying-in-ef-core.aspx
+[6] https://stackoverflow.com/questions/23799091/html-dropdownlistfor-how-to-set-default-value
+[7] https://www.c-sharpcorner.com/interview-question/what-is-the-difference-between-first-and-single-extension-methods-in-linq
+[8] Geoffrey Mwangi, https://www.section.io/engineering-education/c-sharp-enums/, 25 June 2021.
+[9] https://stackoverflow.com/questions/2540825/c-sharp-public-enums-in-classes
+[10] https://stackoverflow.com/questions/21383260/use-enum-for-property-class-in-c-sharp
+[11] Joe, https://stackoverflow.com/questions/16939963/best-practise-to-put-enums-in-mvc-app, 5 June 2013 at 12:47.
+[12] https://stackoverflow.com/questions/7000729/where-should-enums-live-in-an-mvc-project-structure
+[13] Bartosz, https://stackoverflow.com/questions/12386029/separate-class-for-enums, 12 September 2012 at 10:55.
+[14] James Curran, https://stackoverflow.com/questions/2282976/should-enums-in-c-sharp-have-their-own-file, 17 Feb 2010 at 18:08.

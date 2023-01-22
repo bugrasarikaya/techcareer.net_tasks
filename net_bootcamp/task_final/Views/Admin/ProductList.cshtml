@@ -5,6 +5,7 @@
 <h1>@ViewData["Title"]</h1>
 <p>
 	<a asp-action="ProductCreate">Add Product</a>
+	<partial name="_CategoryDropdownViewModel" model='new CategoryDropdownViewModel { Categories = (List<SelectListItem>)ViewData["CategoryDropdownViewModel"]!}'>
 </p>
 <table class="table">
 	<thead>
@@ -16,7 +17,7 @@
 				@Html.DisplayNameFor(model => model.ProductName)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.ProductCategory)
+				@Html.DisplayNameFor(model => model.CategoryName)
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.ProductDescription)
@@ -40,7 +41,7 @@
 					@Html.DisplayFor(modelItem => item.ProductName)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.ProductCategory)
+					@Html.DisplayFor(modelItem => item.CategoryName)
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.ProductDescription)

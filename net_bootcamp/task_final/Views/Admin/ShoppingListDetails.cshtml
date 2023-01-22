@@ -3,6 +3,9 @@
 	ViewData["Title"] = "ShoppingListDetails";
 }
 <h1>@ViewData["Title"]</h1>
+<div>
+	<a asp-action="ShoppingProductAdd" asp-route-id="@ViewData["ShoppingListID"]">Add Product</a>
+</div>
 <table class="table">
 	<thead>
 		<tr>
@@ -13,28 +16,16 @@
 				@Html.DisplayNameFor(model => model.ShoppingProductStatus)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.ShoppingListID)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ShoppingListName)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ShoppingListStatus)
-			</th>
-			<th>
 				@Html.DisplayNameFor(model => model.ProductID)
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.ProductName)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.ProductCategory)
+				@Html.DisplayNameFor(model => model.ShoppingProductQuantity)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.ProductDescription)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.ProductPrice)
+				@Html.DisplayNameFor(model => model.ShoppingProductTotalPrice)
 			</th>
 			<th></th>
 		</tr>
@@ -49,28 +40,19 @@
 					@Html.DisplayFor(modelItem => item.ShoppingProductStatus)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.ShoppingListID)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ShoppingListName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.ShoppingListStatus)
-				</td>
-				<td>
 					@Html.DisplayFor(modelItem => item.ProductID)
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.ProductName)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.ProductCategory)
+					@Html.DisplayFor(modelItem => item.ShoppingProductQuantity)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.ProductDescription)
+					@Html.DisplayFor(modelItem => item.ShoppingProductTotalPrice)
 				</td>
 				<td>
-					@Html.DisplayFor(modelItem => item.ProductPrice)
+					<a asp-action="ShoppingProductEdit" asp-route-id="@item.ShoppingProductID">Edit</a>
 				</td>
 				<td>
 					<a asp-action="ShoppingProductDelete" asp-route-id="@item.ShoppingProductID">Delete</a>
@@ -79,4 +61,3 @@
 		}
 	</tbody>
 </table>
-<a asp-action="ShoppingProductAdd" asp-route-id="@ViewData["ShoppingListID"]">Add Product</a>
