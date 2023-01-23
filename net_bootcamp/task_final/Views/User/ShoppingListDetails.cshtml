@@ -1,22 +1,21 @@
-﻿@model IEnumerable<task_final.ViewModels.ShoppingListProductViewModel>
+﻿@model IEnumerable<task_final.ViewModels.ShoppingProductViewModel>
 @{
-	ViewData["Title"] = "ShoppingListDetails";
+	ViewData["Title"] = "Shopping List Details";
 }
-@if ((string)ViewData["ShoppingListStatus"]! != "On Shopping") {
-	<div>
-		<a asp-action="ShoppingProductAdd" asp-route-shopping_list_id="@ViewData["ShoppingListID"]">Add Product</a>
-	</div>
-}
+<h1>@ViewData["Title"]</h1>
+<hr />
 @if (Model.Count() == 0) {
 	<partial name="_EmptyList" />
 } else {
-	<h1>@ViewData["Title"]</h1>
+	@if ((string)ViewData["ShoppingListStatus"]! != "On Shopping") {
+		<div class="text-center">
+			<a asp-action="ShoppingListStart" asp-route-shopping_list_id="@ViewData["ShoppingListID"]" class="btn btn-warning btn-lg">Go Shopping</a>
+		</div>
+		<br />
+	}
 	<table class="table">
-		<thead>
+		<thead class="table-light">
 			<tr>
-				<th>
-					@Html.DisplayNameFor(model => model.ShoppingProductID)
-				</th>
 				<th>
 					@Html.DisplayNameFor(model => model.ShoppingProductStatus)
 				</th>
@@ -39,9 +38,6 @@
 			@foreach (var item in Model) {
 				<tr>
 					<td>
-						@Html.DisplayFor(modelItem => item.ShoppingProductID)
-					</td>
-					<td>
 						@Html.DisplayFor(modelItem => item.ShoppingProductStatus)
 					</td>
 					<td>
@@ -54,34 +50,43 @@
 						@{
 							if ((string)ViewData["ShoppingListStatus"]! != "On Shopping") {
 								<partial name="_ShoppingProductQuantityViewModel" model='new ShoppingProductQuantityViewModel { ShoppingProudctID = item.ShoppingProductID, Quantity = item.ShoppingProductQuantity}' />
-							} else
+							} else {
 								@Html.DisplayFor(modelItem => item.ShoppingProductQuantity)
+							}
 						}
 					</td>
 					<td>
 						@Html.DisplayFor(modelItem => item.ShoppingProductTotalPrice)
 					</td>
-					@if ((string)ViewData["ShoppingListStatus"]! == "On Shopping") {
-						<td>
-							<a asp-action="ShoppingProductPurchase" asp-route-shopping_product_id="@item.ShoppingProductID">Purchase</a>
-						</td>
-					}
-					@if ((string)ViewData["ShoppingListStatus"]! != "On Shopping") {
-						<td>
-							<a asp-action="ShoppingProductDelete" asp-route-shopping_product_id="@item.ShoppingProductID">Delete</a>
-						</td>
-					}
+					<td class="text-center">
+						@if ((string)ViewData["ShoppingListStatus"]! == "On Shopping" && item.ShoppingProductStatus != "Purchased") {
+							<a asp-action="ShoppingProductPurchase" asp-route-shopping_product_id="@item.ShoppingProductID" class="btn btn-primary btn-lg">Purchase</a>
+						} else if ((string)ViewData["ShoppingListStatus"]! != "On Shopping") {
+							<a asp-action="ShoppingProductDelete" asp-route-shopping_product_id="@item.ShoppingProductID" class="btn btn-danger btn-lg">Delete</a>
+						}
+					</td>
 				</tr>
 			}
+			<tr>
+				<td>@ViewData["ShoppingListStatus"]</td>
+				<td></td>
+				<td></td>
+				<td>@ViewData["ShoppingListTotalQuantiy"]</td>
+				<td>@ViewData["ShoppingListTotalCost"]</td>
+				<td></td>
+			</tr>
 		</tbody>
 	</table>
-	@if ((string)ViewData["ShoppingListStatus"]! != "On Shopping") {
-		<div>
-			<a asp-action="ShoppingListStart" asp-route-shopping_list_id="@ViewData["ShoppingListID"]">Go Shopping</a>
-		</div>
-	} else if ((bool)ViewData["AllPurchased"]! == true) {
-		<div>
-			<a asp-action="ShoppingListComplete" asp-route-shopping_list_id="@ViewData["ShoppingListID"]">Complete Shopping</a>
+	<br />
+	if ((bool)ViewData["AllPurchased"]! == true && (string)ViewData["ShoppingListStatus"]! == "On Shopping") {
+		<div class="text-center">
+			<a asp-action="ShoppingListComplete" asp-route-shopping_list_id="@ViewData["ShoppingListID"]" class="btn btn-success btn-lg">Complete Shopping</a>
 		</div>
 	}
+}
+@if ((string)ViewData["ShoppingListStatus"]! != "On Shopping") {
+	<br />
+	<div class="text-center">
+		<a asp-action="ShoppingProductAdd" asp-route-shopping_list_id="@ViewData["ShoppingListID"]" class="btn btn-primary btn-lg">Add Product</a>
+	</div>
 }

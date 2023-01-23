@@ -10,11 +10,11 @@ namespace task_final.Controllers {
 	public class UserController : Controller {
 		[HttpGet]
 		public IActionResult Main() {
-			return View();
+			return RedirectToAction("ShoppingListList");
 		}
 		public IActionResult AccountDetails() {
 			ShoppingListDbContext context = new ShoppingListDbContext();
-			Account account = context.Accounts.Single(a => a.ID == (int)HttpContext.Session.GetInt32("account_id")!);
+			Account account = context.Accounts.Single(a => a.ID == (int)HttpContext.Session.GetInt32("AccountID")!);
 			context.Dispose();
 			return View(account);
 		}
@@ -23,17 +23,23 @@ namespace task_final.Controllers {
 			ShoppingListDbContext context = new ShoppingListDbContext();
 			Account account = context.Accounts.Single(a => a.ID == account_id);
 			context.Dispose();
-			return View(account);
+			return View(new AccountViewModel() { ID = account.ID, Email = account.Email, Name = account.Name, Surname = account.Surname });
 		}
 		[HttpPost]
 		public IActionResult AccountEdit(AccountViewModel account) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
-			Account account_original = context.Accounts.Single(a => a.ID == account.ID);
-			account_original.Name = account.Name;
-			account_original.Password = account.Password;
-			context.SaveChanges();
-			context.Dispose();
-			return RedirectToAction("AccountDetails");
+			if (context.Accounts.Where(a => a.Email == account.Email).Count() > 0) {
+				ModelState.AddModelError("Email", "Email is already exists.");
+				context.Dispose();
+				return View("AccountEdit", account);
+			} else {
+				Account account_original = context.Accounts.Single(a => a.ID == account.ID);
+				account_original.Email = account.Email;
+				account_original.Password = account.Password;
+				context.SaveChanges();
+				context.Dispose();
+				return RedirectToAction("AccountDetails");
+			}
 		}
 		[HttpGet]
 		public IActionResult ShoppingListCreate() {
@@ -41,13 +47,19 @@ namespace task_final.Controllers {
 		}
 		[HttpPost]
 		public IActionResult ShoppingListCreate(ShoppingList shopping_list) {
-			ShoppingListDbContext context = new ShoppingListDbContext();
-			shopping_list.AccountID = (int)HttpContext.Session.GetInt32("account_id")!;
-			shopping_list.Status = "Created";
-			context.ShoppingLists.Add(shopping_list);
-			context.SaveChanges();
-			context.Dispose();
-			return RedirectToAction("ShoppingListList");
+            ShoppingListDbContext context = new ShoppingListDbContext();
+            if (context.ShoppingLists.Where(sl => sl.AccountID == (int)HttpContext.Session.GetInt32("AccountID")! && sl.Name == shopping_list.Name).Count() > 0) {
+                ModelState.AddModelError("Name", "Shopping list name is already exists.");
+                context.Dispose();
+                return View("ShoppingListCreate", shopping_list);
+            } else {
+                shopping_list.AccountID = (int)HttpContext.Session.GetInt32("AccountID")!;
+                shopping_list.Status = "Created";
+                context.ShoppingLists.Add(shopping_list);
+                context.SaveChanges();
+                context.Dispose();
+                return RedirectToAction("ShoppingListList");
+            }
 		}
 		[HttpGet]
 		public IActionResult ShoppingListDelete(int shopping_list_id) {
@@ -61,19 +73,23 @@ namespace task_final.Controllers {
 		[HttpGet]
 		public IActionResult ShoppingListDetails(int shopping_list_id) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
-			List<ShoppingListProductViewModel> list_shopping_list_product = new List<ShoppingListProductViewModel>();
+			List<ShoppingProductViewModel> list_shopping_list_product = new List<ShoppingProductViewModel>();
 			ShoppingList shopping_list = context.ShoppingLists.Single(sl => sl.ID == shopping_list_id);
 			Product product;
 			List<ShoppingProduct> list_shopping_product = context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list_id).ToList();
 			bool all_purchased = true;
+			int total_quantity = 0;
 			foreach (ShoppingProduct shopping_product in list_shopping_product) {
 				if (all_purchased && shopping_product.Status != "Purchased") all_purchased = false;
+				total_quantity += shopping_product.Quantity;
 				product = context.Products.Single(p => p.ID == shopping_product.ProductID);
-				list_shopping_list_product.Add(new ShoppingListProductViewModel() { ShoppingProductID = shopping_product.ID, ShoppingProductStatus = shopping_product.Status, ShoppingListID = shopping_list_id, ShoppingListName = shopping_list.Name, ShoppingListStatus = shopping_list.Status, ProductID = shopping_product.ProductID, ProductName = product.Name, ShoppingProductQuantity = shopping_product.Quantity, ShoppingProductTotalPrice = shopping_product.TotalPrice });
+				list_shopping_list_product.Add(new ShoppingProductViewModel() { ShoppingProductID = shopping_product.ID, ShoppingProductStatus = shopping_product.Status, ProductID = shopping_product.ProductID, ProductName = product.Name, ShoppingProductQuantity = shopping_product.Quantity, ShoppingProductTotalPrice = shopping_product.TotalPrice });
 			}
 			context.Dispose();
 			ViewData["AllPurchased"] = all_purchased;
 			ViewData["ShoppingListStatus"] = shopping_list.Status;
+			ViewData["ShoppingListTotalQuantiy"] = total_quantity;
+			ViewData["ShoppingListTotalCost"] = shopping_list.TotalCost;
 			ViewData["ShoppingListID"] = shopping_list_id;
 			return View(list_shopping_list_product);
 		}
@@ -87,22 +103,29 @@ namespace task_final.Controllers {
 		[HttpPost]
 		public IActionResult ShoppingListEdit(ShoppingList shopping_list_edit) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
-			ShoppingList shopping_list_original = context.ShoppingLists.Single(sl => sl.ID == shopping_list_edit.ID);
-			shopping_list_original.Name = shopping_list_edit.Name;
-			context.SaveChanges();
-			context.Dispose();
-			return RedirectToAction("ShoppingListList");
+			if (context.ShoppingLists.Where(sl => sl.AccountID == (int)HttpContext.Session.GetInt32("AccountID")! && sl.Name == shopping_list_edit.Name).Count() > 0) {
+				ModelState.AddModelError("Name", "Shopping list name is already exists.");
+				context.Dispose();
+				return View("ShoppingListEdit", shopping_list_edit);
+			} else {
+				ShoppingList shopping_list_original = context.ShoppingLists.Single(sl => sl.ID == shopping_list_edit.ID);
+				shopping_list_original.Name = shopping_list_edit.Name;
+				context.SaveChanges();
+				context.Dispose();
+				return RedirectToAction("ShoppingListList");
+			}
 		}
 		[HttpGet]
 		public IActionResult ShoppingListList() {
 			ShoppingListDbContext context = new ShoppingListDbContext();
-			List<ShoppingList> list_shopping_list = context.ShoppingLists.Where(sl => sl.AccountID == HttpContext.Session.GetInt32("account_id")).ToList();
+			List<ShoppingList> list_shopping_list = context.ShoppingLists.Where(sl => sl.AccountID == HttpContext.Session.GetInt32("AccountID")).ToList();
 			return View(list_shopping_list);
 		}
 		[HttpGet]
 		public IActionResult ShoppingListStart(int shopping_list_id) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
 			context.ShoppingLists.Single(sl => sl.ID == shopping_list_id).Status = "On Shopping";
+			foreach (ShoppingProduct shopping_product in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list_id)) shopping_product.Status = "Not Purchased";
 			context.SaveChanges();
 			return RedirectToAction("ShoppingListDetails", new { shopping_list_id = shopping_list_id });
 		}
@@ -118,7 +141,7 @@ namespace task_final.Controllers {
 			ShoppingListDbContext context = new ShoppingListDbContext();
 			CategoryDropdownViewModel category_dropdown = new CategoryDropdownViewModel();
 			category_dropdown.Categories = new List<SelectListItem> { new SelectListItem { Text = "All", Value = "0" } };
-			foreach (Category category in context.Categories.Select(a => new Category() { ID = a.ID, Name = a.Name }).ToList()) category_dropdown.Categories.Add(new SelectListItem { Text = category.Name, Value = category.ID.ToString() });
+			foreach (Category category in context.Categories.Select(a => new Category() { ID = a.ID, Name = a.Name }).ToList()) category_dropdown.Categories.Add(new SelectListItem { Text = category.Name, Value = category.ID.ToString(), Selected = category_id == category.ID.ToString() ? true : false });
 			ViewData["CategoryDropdownViewModel"] = category_dropdown.Categories;
 			ViewData["ShoppingListID"] = shopping_list_id;
 			ProductImageGetViewModel product_image_get_view_model = new ProductImageGetViewModel();
@@ -139,7 +162,10 @@ namespace task_final.Controllers {
 				context.SaveChanges();
 				ShoppingList shopping_list = context.ShoppingLists.Single(sp => sp.ID == shopping_list_product.ShoppingListID);
 				shopping_list.TotalCost = 0;
-				foreach (ShoppingProduct shopping_product in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) shopping_list.TotalCost += shopping_product.TotalPrice;
+				foreach (ShoppingProduct shopping_product in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) {
+					shopping_list.TotalCost += shopping_product.TotalPrice;
+					shopping_list.Status = "Not Purchased";
+				}
 				shopping_list.Status = "Updated";
 			} else {
 				ShoppingProduct shopping_product_1 = context.ShoppingProducts.Single(sp => sp.ShoppingListID == shopping_list_product.ShoppingListID && sp.ProductID == shopping_list_product.ProductID);
@@ -147,7 +173,10 @@ namespace task_final.Controllers {
 				shopping_product_1.TotalPrice = context.Products.Single(p => p.ID == shopping_list_product.ProductID).Price * shopping_product_1.Quantity;
 				ShoppingList shopping_list = context.ShoppingLists.Single(sp => sp.ID == shopping_list_product.ShoppingListID);
 				shopping_list.TotalCost = 0;
-				foreach (ShoppingProduct shopping_product_2 in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) shopping_list.TotalCost += shopping_product_2.TotalPrice;
+				foreach (ShoppingProduct shopping_product_2 in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) {
+					shopping_list.TotalCost += shopping_product_2.TotalPrice;
+					shopping_list.Status = "Not Purchased";
+				}
 				shopping_list.Status = "Updated";
 			}
 			context.SaveChanges();
@@ -161,7 +190,10 @@ namespace task_final.Controllers {
 			ShoppingList shopping_list = context.ShoppingLists.Single(sp => sp.ID == shopping_product_1.ShoppingListID);
 			shopping_product_1.TotalPrice = 0;
 			shopping_list.TotalCost = 0;
-			foreach (ShoppingProduct shopping_product_2 in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) shopping_list.TotalCost += shopping_product_2.TotalPrice;
+			foreach (ShoppingProduct shopping_product_2 in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) {
+				shopping_list.TotalCost += shopping_product_2.TotalPrice;
+				shopping_product_2.Status = "Not Purchased";
+			}
 			context.ShoppingProducts.Remove(shopping_product_1);
 			shopping_list.Status = "Updated";
 			context.SaveChanges();
@@ -193,7 +225,10 @@ namespace task_final.Controllers {
 				ShoppingList shopping_list = context.ShoppingLists.Single(sp => sp.ID == shopping_product.ShoppingListID);
 				shopping_list.Status = "Updated";
 				shopping_list.TotalCost = 0;
-				foreach (ShoppingProduct shopping_product_2 in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) shopping_list.TotalCost += shopping_product_2.TotalPrice;
+				foreach (ShoppingProduct shopping_product_2 in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) {
+					shopping_list.TotalCost += shopping_product_2.TotalPrice;
+					shopping_list.Status = "Not Purchased";
+				}
 				context.SaveChanges();
 			}
 			context.Dispose();

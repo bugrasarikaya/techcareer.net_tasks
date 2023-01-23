@@ -1,20 +1,15 @@
 ﻿@model IEnumerable<task_final.Models.ShoppingList>
 @{
-	ViewData["Title"] = "ShoppingListList";
+	ViewData["Title"] = "Shopping Lists";
 }
-<p>
-	<a asp-action="ShoppingListCreate">Create New</a>
-</p>
+<h1>@ViewData["Title"]</h1>
+<hr />
 @if (Model.Count() == 0) {
 	<partial name="_EmptyList" />
 } else {
-	<h1>@ViewData["Title"]</h1>
 	<table class="table">
-		<thead>
+		<thead class="table-light">
 			<tr>
-				<th>
-					@Html.DisplayNameFor(model => model.ID)
-				</th>
 				<th>
 					@Html.DisplayNameFor(model => model.Name)
 				</th>
@@ -31,9 +26,6 @@
 			@foreach (var item in Model) {
 				<tr>
 					<td>
-						@Html.DisplayFor(modelItem => item.ID)
-					</td>
-					<td>
 						@Html.DisplayFor(modelItem => item.Name)
 					</td>
 					<th>
@@ -42,13 +34,17 @@
 					<td>
 						@Html.DisplayFor(modelItem => item.Status)
 					</td>
-					<td>
-						<a asp-action="ShoppingListDetails" asp-route-shopping_list_id="@item.ID">Details</a>
-						<a asp-action="ShoppingListEdit" asp-route-shopping_list_id="@item.ID">Edit</a>
-						<a asp-action="ShoppingListDelete" asp-route-shopping_list_id="@item.ID">Delete</a>
+					<td class="text-center">
+						<a asp-action="ShoppingListDetails" asp-route-shopping_list_id="@item.ID" class="btn btn-primary btn-lg">Details</a>&emsp;
+						<a asp-action="ShoppingListEdit" asp-route-shopping_list_id="@item.ID" class="btn btn-primary btn-lg">Edit</a>&emsp;
+						<a asp-action="ShoppingListDelete" asp-route-shopping_list_id="@item.ID" class="btn btn-danger btn-lg">Delete</a>
 					</td>
 				</tr>
 			}
 		</tbody>
 	</table>
 }
+<br />
+<div class="text-center">
+	<a asp-action="ShoppingListCreate" class="btn btn-primary btn-lg">Create Shopping List</a>
+</div>

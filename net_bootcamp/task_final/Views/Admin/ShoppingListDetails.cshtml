@@ -1,22 +1,20 @@
-﻿@model IEnumerable<task_final.ViewModels.ShoppingListProductViewModel>
+﻿@model IEnumerable<task_final.ViewModels.ShoppingProductViewModel>
 @{
-	ViewData["Title"] = "ShoppingListDetails";
+	ViewData["Title"] = "Shopping List Details";
 }
-<div>
-	<a asp-action="ShoppingProductAdd" asp-route-id="@ViewData["ShoppingListID"]">Add Product</a>
-</div>
+<h1>@ViewData["Title"]</h1>
+<hr />
 @if (Model.Count() == 0) {
 	<partial name="_EmptyList" />
 } else {
-	<h1>@ViewData["Title"]</h1>
 	<table class="table">
-		<thead>
+		<thead class="table-light">
 			<tr>
 				<th>
-					@Html.DisplayNameFor(model => model.ShoppingProductID)
+					@Html.DisplayNameFor(model => model.ShoppingProductStatus)
 				</th>
 				<th>
-					@Html.DisplayNameFor(model => model.ShoppingProductStatus)
+					@Html.DisplayNameFor(model => model.ShoppingProductID)
 				</th>
 				<th>
 					@Html.DisplayNameFor(model => model.ProductID)
@@ -37,10 +35,10 @@
 			@foreach (var item in Model) {
 				<tr>
 					<td>
-						@Html.DisplayFor(modelItem => item.ShoppingProductID)
+						<partial name="_ShoppingProductStatusViewModel" model='new ShoppingProductStatusViewModel { ShoppingProudctID = item.ShoppingProductID, StatusName = item.ShoppingProductStatus, Statuses = item.ShoppingProductStatuses}' />
 					</td>
 					<td>
-						<partial name="_ShoppingProductStatusViewModel" model='new ShoppingProductStatusViewModel { ShoppingProudctID = item.ShoppingProductID, StatusName = item.ShoppingProductStatus, Statuses = item.ShoppingProductStatuses}' />
+						@Html.DisplayFor(modelItem => item.ShoppingProductID)
 					</td>
 					<td>
 						@Html.DisplayFor(modelItem => item.ProductID)
@@ -54,11 +52,25 @@
 					<td>
 						@Html.DisplayFor(modelItem => item.ShoppingProductTotalPrice)
 					</td>
-					<td>
-						<a asp-action="ShoppingProductDelete" asp-route-id="@item.ShoppingProductID">Delete</a>
+					<td class="text-center">
+						<a asp-action="ShoppingProductDetails" asp-route-shopping_product_id="@item.ShoppingProductID" class="btn btn-primary btn-lg">Detail</a>&emsp;
+						<a asp-action="ShoppingProductDelete" asp-route-shopping_product_id="@item.ShoppingProductID" class="btn btn-danger btn-lg">Delete</a>
 					</td>
 				</tr>
 			}
+			<tr>
+				<td>@ViewData["ShoppingListStatus"]</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>@ViewData["ShoppingListTotalQuantiy"]</td>
+				<td>@ViewData["ShoppingListTotalCost"]</td>
+				<td></td>
+			</tr>
 		</tbody>
 	</table>
 }
+<br />
+<div class="text-center">
+	<a asp-action="ShoppingProductAdd" asp-route-shopping_list_id="@ViewData["ShoppingListID"]" class="btn btn-primary" btn-lg>Add Product</a>
+</div>

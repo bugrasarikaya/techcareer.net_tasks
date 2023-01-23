@@ -1,6 +1,6 @@
 ﻿@model task_final.ViewModels.ShoppingListEditViewModel
 @{
-	ViewData["Title"] = "ShoppingListEdit";
+	ViewData["Title"] = "Shopping List Editing";
 }
 <h1>@ViewData["Title"]</h1>
 <hr />
@@ -14,18 +14,21 @@
 				<input asp-for="Name" class="form-control" />
 				<span asp-validation-for="Name" class="text-danger"></span>
 			</div>
+			<br />
 			<div class="form-group">
-				<label asp-for="AccountID" class="control-label"></label>
-				<select asp-for="AccountID" asp-items="Model.Accounts"></select>
-				<span asp-validation-for="AccountID" class="text-danger"></span>
+				<label asp-for="AccountEmail" class="control-label"></label>
+				<select asp-for="AccountEmail" asp-items="Model.AccountEmails"></select>
+				<span asp-validation-for="AccountEmail" class="text-danger"></span>
 			</div>
+			<br />
 			<div class="form-group">
 				<label asp-for="StatusName" class="control-label"></label>
 				<select asp-for="StatusName" asp-items="Model.Statuses"></select>
 				<span asp-validation-for="StatusName" class="text-danger"></span>
 			</div>
+			<br />
 			<div class="form-group">
-				<input type="submit" value="Save" class="btn btn-primary" />
+				<input type="submit" value="Save" class="btn btn-primary btn-lg" />
 			</div>
 		</form>
 	</div>

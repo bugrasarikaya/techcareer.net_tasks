@@ -1,20 +1,19 @@
 ﻿@model IEnumerable<task_final.ViewModels.ProductImageGetViewModel>
 @{
-	ViewData["Title"] = "Products";
+	ViewData["Title"] = "Product List";
 }
-<p>
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div>
 	<partial name="_CategoryDropdownViewModel" model='new CategoryDropdownViewModel { ShoppingListID = (int)ViewData["ShoppingListID"]!, Categories = (List<SelectListItem>)ViewData["CategoryDropdownViewModel"]!}' />
-</p>
+</div>
+<br />
 @if (Model.Count() == 0) {
 	<partial name="_EmptyList" />
 } else {
-	<h1>@ViewData["Title"]</h1>
 	<table class="table">
-		<thead>
+		<thead class="table-light">
 			<tr>
-				<th>
-					@Html.DisplayNameFor(model => model.ProductID)
-				</th>
 				<th>
 					@Html.DisplayNameFor(model => model.ProductName)
 				</th>
@@ -37,9 +36,6 @@
 			@foreach (var item in Model) {
 				<tr>
 					<td>
-						@Html.DisplayFor(modelItem => item.ProductID)
-					</td>
-					<td>
 						@Html.DisplayFor(modelItem => item.ProductName)
 					</td>
 					<td>
@@ -54,7 +50,7 @@
 					<td>
 						<img src="@Html.DisplayFor(modelItem => item.ImageSource)" height="200" />
 					</td>
-					<td>
+					<td class="text-center">
 						<partial name="_ShoppingListProductIDViewModel" model='new ShoppingListProductIDViewModel { ShoppingListID = (int)ViewData["ShoppingListID"]!, ProductID = item.ProductID}' />
 					</td>
 				</tr>

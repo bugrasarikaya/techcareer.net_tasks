@@ -1,16 +1,14 @@
 ﻿@model IEnumerable<task_final.ViewModels.ShoppingListListViewModel>
 @{
-	ViewData["Title"] = "ShoppingListList";
+	ViewData["Title"] = "Shopping Lists";
 }
-<p>
-	<a asp-action="ShoppingListCreate">Create New</a>
-</p>
+<h1>@ViewData["Title"]</h1>
+<hr />
 @if (Model.Count() == 0) {
 	<partial name="_EmptyList" />
 } else {
-	<h1>@ViewData["Title"]</h1>
 	<table class="table">
-		<thead>
+		<thead class="table-light">
 			<tr>
 				<th>
 					@Html.DisplayNameFor(model => model.ID)
@@ -22,7 +20,7 @@
 					@Html.DisplayNameFor(model => model.AccountID)
 				</th>
 				<th>
-					@Html.DisplayNameFor(model => model.AccountName)
+					@Html.DisplayNameFor(model => model.AccountEmail)
 				</th>
 				<th>
 					@Html.DisplayNameFor(model => model.TotalCost)
@@ -46,7 +44,7 @@
 						@Html.DisplayFor(modelItem => item.AccountID)
 					</td>
 					<td>
-						@Html.DisplayFor(modelItem => item.AccountName)
+						@Html.DisplayFor(modelItem => item.AccountEmail)
 					</td>
 					<th>
 						@Html.DisplayFor(model => item.TotalCost)
@@ -54,13 +52,16 @@
 					<td>
 						@Html.DisplayFor(modelItem => item.Status)
 					</td>
-					<td>
-						<a asp-action="ShoppingListDetails" asp-route-id="@item.ID">Details</a>
-						<a asp-action="ShoppingListEdit" asp-route-id="@item.ID">Edit</a>
-						<a asp-action="ShoppingListDelete" asp-route-id="@item.ID">Delete</a>
+					<td class="text-center">
+						<a asp-action="ShoppingListDetails" asp-route-shopping_list_id="@item.ID" class="btn btn-primary btn-lg">Details</a>&emsp;
+						<a asp-action="ShoppingListEdit" asp-route-shopping_list_id="@item.ID" class="btn btn-primary btn-lg">Edit</a>&emsp;
+						<a asp-action="ShoppingListDelete" asp-route-shopping_list_id="@item.ID" class="btn btn-danger btn-lg">Delete</a>
 					</td>
 				</tr>
 			}
 		</tbody>
 	</table>
 }
+<div class="text-center">
+	<a asp-action="ShoppingListCreate" class="btn btn-primary btn-lg">Create Shopping List</a>
+</div>

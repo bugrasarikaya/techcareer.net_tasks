@@ -1,11 +1,10 @@
 ﻿@model task_final.ViewModels.ProductImageDetailsViewModel
 @{
-	ViewData["Title"] = "Details";
+	ViewData["Title"] = "Product Details";
 }
 <h1>@ViewData["Title"]</h1>
+<hr />
 <div>
-	<h4>ProductImageViewModel</h4>
-	<hr />
 	<dl class="row">
 		<dt class="col-sm-2">
 			@Html.DisplayNameFor(model => model.ProductID)
@@ -58,5 +57,5 @@
 	</dl>
 </div>
 <div>
-	<a asp-action="ProductEdit" asp-route-id="@Model.ProductID">Edit</a>
+	<a asp-action="ProductEdit" asp-route-product_id="@Model.ProductID" class="btn btn-primary btn-lg">Edit</a>
 </div>

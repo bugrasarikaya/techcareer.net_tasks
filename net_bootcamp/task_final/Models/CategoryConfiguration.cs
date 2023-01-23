@@ -5,7 +5,7 @@ namespace task_final.Models {
         public void Configure(EntityTypeBuilder<Category> builder) {
             builder.ToTable("Categories");
             builder.HasKey(c => c.ID);
-            builder.Property(c => c.Name).IsRequired(true).HasMaxLength(25).HasColumnType("varchar");
+            builder.Property(c => c.Name).IsRequired(true).HasMaxLength(100).HasColumnType("varchar");
 		}
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using task_final.Models;
 
@@ -10,9 +11,11 @@ using task_final.Models;
 namespace taskfinal.Migrations
 {
     [DbContext(typeof(ShoppingListDbContext))]
-    partial class ShoppingListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230122234719_migration_16")]
+    partial class migration16
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,27 +34,27 @@ namespace taskfinal.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(50)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(40)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(40)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Role")
                         .IsRequired()
-                        .HasMaxLength(30)
+                        .HasMaxLength(20)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(40)
                         .HasColumnType("varchar");
 
                     b.HasKey("ID");
@@ -69,7 +72,7 @@ namespace taskfinal.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(25)
                         .HasColumnType("varchar");
 
                     b.HasKey("ID");
@@ -87,11 +90,12 @@ namespace taskfinal.Migrations
 
                     b.Property<byte[]>("Binary")
                         .IsRequired()
+                        .HasMaxLength(30)
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(25)
                         .HasColumnType("varchar");
 
                     b.HasKey("ID");
@@ -111,7 +115,7 @@ namespace taskfinal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(100)
+                        .HasMaxLength(20)
                         .HasColumnType("varchar");
 
                     b.Property<int>("ImageID")
@@ -119,7 +123,7 @@ namespace taskfinal.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(25)
                         .HasColumnType("varchar");
 
                     b.Property<double>("Price")
@@ -143,12 +147,12 @@ namespace taskfinal.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(25)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(30)
+                        .HasMaxLength(20)
                         .HasColumnType("varchar");
 
                     b.Property<double>("TotalCost")
@@ -178,7 +182,7 @@ namespace taskfinal.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(30)
+                        .HasMaxLength(20)
                         .HasColumnType("varchar");
 
                     b.Property<double>("TotalPrice")

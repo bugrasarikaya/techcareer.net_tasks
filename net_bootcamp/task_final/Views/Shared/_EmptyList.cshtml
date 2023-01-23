@@ -7,4 +7,6 @@
 	else if (ViewContext.RouteData.Values["action"]?.ToString() == "ShoppingProductAdd") ViewData["list"] = "Product";
 	Layout = null;
 }
-<h2>@ViewData["list"] could not found.</h2>
+<div class="text-center">
+	@ViewData["list"] could not be found.
+</div>

@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 namespace task_final.ViewModels {
     public class ShoppingListCreateViewModel {
         public int ID { get; set; }
-        public string Name { get; set; } = null!;
-        public string AccountID { get; set; } = null!;
-        public string AccountName { get; set; } = null!;
-        public List<SelectListItem> Accounts { set; get; } = null!;
+		[StringLength(100)]
+		public string Name { get; set; } = null!;
+        public string AccountEmail { get; set; } = null!;
+        public List<SelectListItem> AccountEmails { set; get; } = null!;
     }
 }

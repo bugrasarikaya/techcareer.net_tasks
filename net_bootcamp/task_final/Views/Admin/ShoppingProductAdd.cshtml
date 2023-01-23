@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<task_final.ViewModels.ProductImageGetViewModel>
 @{
-	ViewData["Title"] = "Products";
+	ViewData["Title"] = "Product List";
 }
-<a asp-action="ProductCreate">Add Product</a>
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div>
+	<partial name="_CategoryDropdownViewModel" model='new CategoryDropdownViewModel { ShoppingListID = (int)ViewData["ShoppingListID"]!, Categories = (List<SelectListItem>)ViewData["CategoryDropdownViewModel"]!}' />
+</div>
+<br />
 @if (Model.Count() == 0) {
 	<partial name="_EmptyList" />
 } else {
-	<h1>@ViewData["Title"]</h1>
-	<p>
-		<partial name="_CategoryDropdownViewModel" model='new CategoryDropdownViewModel { ShoppingListID = (int)ViewData["ShoppingListID"]!, Categories = (List<SelectListItem>)ViewData["CategoryDropdownViewModel"]!}' />
-	</p>
 	<table class="table">
-		<thead>
+		<thead class="table-light">
 			<tr>
 				<th>
 					@Html.DisplayNameFor(model => model.ProductID)
@@ -55,7 +56,7 @@
 					<td>
 						<img src="@Html.DisplayFor(modelItem => item.ImageSource)" height="200" />
 					</td>
-					<td>
+					<td class="text-center">
 						<partial name="_ShoppingListProductIDViewModel" model='new ShoppingListProductIDViewModel { ShoppingListID = (int)ViewData["ShoppingListID"]!, ProductID = item.ProductID}' />
 					</td>
 				</tr>
@@ -63,3 +64,7 @@
 		</tbody>
 	</table>
 }
+<br />
+<div class="text-center">
+	<a asp-action="ProductCreate" class="btn btn-primary">Add Product</a>
+</div>

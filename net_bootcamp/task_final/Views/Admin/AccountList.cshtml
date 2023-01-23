@@ -2,24 +2,19 @@
 @{
 	ViewData["Title"] = "Account List";
 }
-<p>
-	<a asp-action="AccountCreate">Create New</a>
-</p>
+<h1>@ViewData["Title"]</h1>
+<hr />
 @if (Model.Count() == 0) {
 	<partial name="_EmptyList" />
 } else {
-	<h1>@ViewData["Title"]</h1>
 	<table class="table">
-		<thead>
+		<thead class="table-light">
 			<tr>
 				<th>
 					@Html.DisplayNameFor(model => model.ID)
 				</th>
 				<th>
-					@Html.DisplayNameFor(model => model.Name)
-				</th>
-				<th>
-					@Html.DisplayNameFor(model => model.Password)
+					@Html.DisplayNameFor(model => model.Email)
 				</th>
 				<th>
 					@Html.DisplayNameFor(model => model.Role)
@@ -34,20 +29,20 @@
 						@Html.DisplayFor(modelItem => item.ID)
 					</td>
 					<td>
-						@Html.DisplayFor(modelItem => item.Name)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Password)
+						@Html.DisplayFor(modelItem => item.Email)
 					</td>
 					<td>
 						@Html.DisplayFor(modelItem => item.Role)
 					</td>
-					<td>
-						<a asp-action="AccountDetails" asp-route-id="@item.ID">Details</a>
-						<a asp-action="AccountDelete" asp-route-id="@item.ID">Delete</a>
+					<td class="text-center">
+						<a asp-action="AccountDetails" asp-route-account_id="@item.ID" class="btn btn-primary btn-lg">Details</a>&emsp;
+						<a asp-action="AccountDelete" asp-route-account_id="@item.ID" class="btn btn-danger btn-lg">Delete</a>
 					</td>
 				</tr>
 			}
 		</tbody>
 	</table>
 }
+<div class="text-center">
+	<a asp-action="AccountCreate" class="btn btn-primary btn-lg">Create Account</a>
+</div>

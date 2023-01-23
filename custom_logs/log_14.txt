@@ -1,0 +1,55 @@
+Design development process was started.
+"_Layout.cshtml" was renamed as "_LayoutLogin.cshtml" and "Main" section was removed form its navigation bar.
+"Shopping List" title was renamed to "Shopping List App".
+After reading task instructions, changing "Account" model's content, was decided because some properties and validations were missing.
+Account name properties were changed to account emails.
+Name and surname properties were added into "Account" model and after setting configurations, sixteenth migration was applied.
+It was observed that new columns of account table, was added to end of the table.
+Column location was changed on SSMS for "Accounts" table.
+Dumb values were added to empty column values.
+"email" and "password" types were set to input sections of login page.
+A data annotation configuration from a webpage, was used for confirming password.
+By benefiting 3 [2] [3] [4] webpages, validation of register page, was upgraded.
+Method of popping a error message for validation, was learnt after examining 2 webpages [5] [6] but a better solution which adding validation message, was found in another webpage [7].
+Register validation was completed.
+"Register" hyperlink was changed to button.
+"&emsp;" statement was found in a webpage [8].
+Max length of string properties was increased to 100 and max length of small string properties was increased to 30.
+Seventh migration was applied.
+On a webpage [9], it was learnt that "MaxLength" and "StringLength" data annotations do not allow to write characters more than limit.
+Difference between "MaxLength" and "StringLength" data annotations, was learnt on a webpage [10].
+A redirection to shopping list page from main page, was established because any simple main menu design idea could not be found.
+Using "creation" word instead of "creating" word, was decided because it was more common in search results.
+Button classes of Bootstrap, were examined on a webpage [11] and some of them was used.
+While examining views, hyperlinks changed to button and some validation were added.
+Parameter names of "Admin" controller, were changed for being more specific.
+Table tag tutorial [12] of Bootstrap, was examined and applied.
+"dt", "dl" and "dd" tags were examined on a webpage [13].
+Thanks to "Display" attribute which was found in a webpage [14], table title names were not edited manually on every view.
+"List<SelectListItem>" property could not be posted on submitting form by using hidden input.
+Showed value which is password, could not be hidden and it was removed in details page.
+Instead of using double "<br />" tag, one "<p>" tag was used on create buttons because it made buttons' locations more proper.
+By benefiting 3 [15] [16] [17] webpages table style was changed and button were centered.
+After reading briefly two webages [18] [19] about difference between "<div>" vs "<p>" tags, "<p>" tags were changed "<div>" tags.
+Design issues was nearly fixed because there were some ignored design problem which one of them, is simplicity of empty view page which reports list is empty.
+Bugs were fixed.
+Database was exported.
+[1] dharmendr, https://www.aspsnippets.com/questions/162455/Compare-password-and-confirm-password-in-ASPNet-Core-MVC/, 29 Oct 2020 05:42 AM.
+[2] Manish Kumar Choudhary, https://www.c-sharpcorner.com/UploadFile/ee01e6/important-list-of-regular-expressions-and-its-uses/, 18 Aug 2019.
+[3] Önay YALÇINER, https://social.msdn.microsoft.com/Forums/tr-TR/092e5c90-0c5c-402b-850b-8469589b8f39/ifre-alanna-bir-byk-harf-bir-kk-harf-ve-say-girii-zorunlu-olsun?forum=csharptr, 8 June 2015 at 10:09.
+[4] Mike Upjohn, https://stackoverflow.com/questions/40913767/regex-for-a-complex-password, 1 December 2016 at 14:56.
+[5] Fei Han, https://stackoverflow.com/questions/66036740/how-can-i-show-error-message-in-asp-net-core-mvc, 4 Feb 2021 at 2:17.
+[6] Mudassar Khan, https://www.aspsnippets.com/Articles/ASPNet-MVC-Core-Display-Message-from-Controller-in-View-using-JavaScript-Alert-MessageBox.aspx, 04 Jan 2020.
+[7] Grizzly, https://stackoverflow.com/questions/46957378/return-current-page-with-an-error-message, 26 Oct 2017 at 15:02.
+[8] sayantanm19, https://www.geeksforgeeks.org/how-to-insert-spaces-tabs-in-text-using-html-css/, 30 Jul 2021.
+[9] Harkirat singh, https://stackoverflow.com/questions/67519048/maxlength-validation-stopping-me-from-writing-more-than-the-maxlength-in-mvc6, 13 May 2021 at 15:41.
+[10] Swaff, https://stackoverflow.com/questions/5717033/stringlength-vs-maxlength-attributes-asp-net-mvc-with-entity-framework-ef-code-f, 19 April 2011 at 13:46.
+[11] https://getbootstrap.com/docs/4.0/components/buttons/
+[12] https://getbootstrap.com/docs/4.0/content/tables/
+[13] https://getbootstrap.com/docs/4.0/content/typography/
+[14] Dean Goodman, https://stackoverflow.com/questions/38708370/displaynamefor-tag-change-text, 1 Aug 2016 at 21:52.
+[15] https://getbootstrap.com/docs/4.0/content/figures/
+[16] https://www.tutorialrepublic.com/faq/how-to-center-buttons-in-bootstrap.php
+[17] https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-tables.php
+[18] https://stackoverflow.com/questions/2226562/what-is-the-difference-between-p-and-div
+[19] https://discuss.codecademy.com/t/div-and-p-elements-seem-to-do-the-same-thing-what-are-the-differences-between-the-two/300314/4

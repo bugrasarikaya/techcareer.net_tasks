@@ -1,16 +1,14 @@
 ﻿@model IEnumerable<task_final.Models.Category>
 @{
-	ViewData["Title"] = "CategoryList";
+	ViewData["Title"] = "Category List";
 }
-<p>
-	<a asp-action="CategoryCreate">Create Category</a>
-</p>
+<h1>@ViewData["Title"]</h1>
+<hr />
 @if (Model.Count() == 0) {
 	<partial name="_EmptyList" />
 } else {
-	<h1>@ViewData["Title"]</h1>
 	<table class="table">
-		<thead>
+		<thead class="table-light">
 			<tr>
 				<th>
 					@Html.DisplayNameFor(model => model.ID)
@@ -30,12 +28,15 @@
 					<td>
 						@Html.DisplayFor(modelItem => item.Name)
 					</td>
-					<td>
-						<a asp-action="CategoryEdit" asp-route-id="@item.ID">Edit</a>
-						<a asp-action="CategoryDelete" asp-route-id="@item.ID">Delete</a>
+					<td class="text-center">
+						<a asp-action="CategoryEdit" asp-route-category_id="@item.ID" class="btn btn-primary btn-lg">Edit</a>&emsp;
+						<a asp-action="CategoryDelete" asp-route-category_id="@item.ID" class="btn btn-danger btn-lg">Delete</a>
 					</td>
 				</tr>
 			}
 		</tbody>
 	</table>
 }
+<div class="text-center">
+	<a asp-action="CategoryCreate" class="btn btn-primary btn-lg">Create Category</a>
+</div>

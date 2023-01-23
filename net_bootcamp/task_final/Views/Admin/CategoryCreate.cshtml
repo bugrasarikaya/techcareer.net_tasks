@@ -1,6 +1,6 @@
 ﻿@model task_final.Models.Category
 @{
-    ViewData["Title"] = "Category Create";
+    ViewData["Title"] = "Category Creation";
 }
 <h1>@ViewData["Title"]</h1>
 <hr />
@@ -11,10 +11,11 @@
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary btn-lg" />
             </div>
         </form>
     </div>
