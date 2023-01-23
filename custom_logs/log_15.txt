@@ -1,0 +1,7 @@
+After fixing some bugs, almost every rows were deleted in database.
+Some product images was downloaded and they were added to application
+After fixing some bugs, a video recordded.
+Database was exported.
+A music track [1] was selected to import record.
+"demo_task_final.mp4" file was stored in videos folder.
+[1] MamuttiVLog, https://youtu.be/o6zfcN2rJsY, 1 September 2012.

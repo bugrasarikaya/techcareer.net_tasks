@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using task_final.Models;
 using task_final.ViewModels;
 namespace task_final.Controllers {
@@ -113,7 +112,7 @@ namespace task_final.Controllers {
 			}
 		}
 		[HttpGet]
-		public IActionResult CategorytDelete(int category_id) {
+		public IActionResult CategoryDelete(int category_id) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
 			context.Remove(context.Categories.Single(c => c.ID == category_id));
 			context.SaveChanges();
@@ -181,8 +180,13 @@ namespace task_final.Controllers {
 		[HttpGet]
 		public IActionResult ProductDelete(int product_id) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
+			context.Images.Remove(context.Images.Single(i => i.ID == context.Products.Single(p => p.ID == product_id).ImageID));
+			context.ShoppingProducts.RemoveRange(context.ShoppingProducts.Where(spl => spl.ProductID == product_id));
 			context.Products.Remove(context.Products.Single(p => p.ID == product_id));
-			context.Images.Remove(context.Images.Single(i => i.ID == product_id));
+			foreach (ShoppingList shopping_list in context.ShoppingLists.Select(sl => sl).ToList()) {
+				shopping_list.TotalCost = 0;
+				foreach (ShoppingProduct shopping_product in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) shopping_list.TotalCost += shopping_product.TotalPrice;
+			}
 			context.SaveChanges();
 			context.Dispose();
 			return RedirectToAction("ProductList");
@@ -247,7 +251,6 @@ namespace task_final.Controllers {
 			category_dropdown.Categories = new List<SelectListItem> { new SelectListItem { Text = "All", Value = "0" } };
 			foreach (Category category in context.Categories.Select(a => new Category() { ID = a.ID, Name = a.Name }).ToList()) category_dropdown.Categories.Add(new SelectListItem { Text = category.Name, Value = category.ID.ToString(), Selected = category_id == category.ID.ToString() ? true : false });
 			ViewData["CategoryDropdownViewModel"] = category_dropdown.Categories;
-			ProductImageGetViewModel product_image_get_view_model = new ProductImageGetViewModel();
 			List<Product> list_product = context.Products.Where(p => p.CategoryID == ((category_id == "0" || category_id == null) ? p.CategoryID : int.Parse(category_id))).ToList();
 			List<ProductImageGetViewModel> list_product_image = new List<ProductImageGetViewModel>();
 			foreach (Product product in list_product) {
@@ -335,7 +338,8 @@ namespace task_final.Controllers {
 		[HttpPost]
 		public IActionResult ShoppingListEdit(ShoppingListEditViewModel shopping_list_edit) {
 			ShoppingListDbContext context = new ShoppingListDbContext();
-			if (context.ShoppingLists.Where(sl => sl.AccountID == context.Accounts.Single(a => a.Email == shopping_list_edit.AccountEmail).ID && sl.Name == shopping_list_edit.Name).Count() > 0) {
+			//if (context.Accounts.Where(a => a.ID != account.ID && a.Email == account.Email).Count() > 0) {
+			if (context.ShoppingLists.Where(sl => sl.ID != shopping_list_edit.ID && sl.AccountID == context.Accounts.Single(a => a.Email == shopping_list_edit.AccountEmail).ID && sl.Name == shopping_list_edit.Name).Count() > 0) {
 				ModelState.AddModelError("Name", "Shopping list name is already exists.");
 				List<SelectListItem> list_select_list_item_account_emails = new List<SelectListItem>();
 				foreach (Account account in context.Accounts.Select(sl => sl).ToList()) list_select_list_item_account_emails.Add(new SelectListItem { Text = account.Email, Value = account.Email });
@@ -380,7 +384,6 @@ namespace task_final.Controllers {
 			foreach (Category category in context.Categories.Select(a => new Category() { ID = a.ID, Name = a.Name }).ToList()) category_dropdown.Categories.Add(new SelectListItem { Text = category.Name, Value = category.ID.ToString(), Selected = category_id == category.ID.ToString() ? true : false });
 			ViewData["CategoryDropdownViewModel"] = category_dropdown.Categories;
 			ViewData["ShoppingListID"] = shopping_list_id;
-			ProductImageGetViewModel product_image_get_view_model = new ProductImageGetViewModel();
 			List<Product> list_product = context.Products.Where(p => p.CategoryID == ((category_id == "0" || category_id == null) ? p.CategoryID : int.Parse(category_id))).ToList();
 			List<ProductImageGetViewModel> list_product_image = new List<ProductImageGetViewModel>();
 			foreach (Product product in list_product) {
