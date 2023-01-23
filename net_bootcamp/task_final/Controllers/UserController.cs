@@ -164,7 +164,7 @@ namespace task_final.Controllers {
 				shopping_list.TotalCost = 0;
 				foreach (ShoppingProduct shopping_product in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) {
 					shopping_list.TotalCost += shopping_product.TotalPrice;
-					shopping_list.Status = "Not Purchased";
+					shopping_product.Status = "Not Purchased";
 				}
 				shopping_list.Status = "Updated";
 			} else {
@@ -175,7 +175,7 @@ namespace task_final.Controllers {
 				shopping_list.TotalCost = 0;
 				foreach (ShoppingProduct shopping_product_2 in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) {
 					shopping_list.TotalCost += shopping_product_2.TotalPrice;
-					shopping_list.Status = "Not Purchased";
+					shopping_product_2.Status = "Not Purchased";
 				}
 				shopping_list.Status = "Updated";
 			}
@@ -227,7 +227,7 @@ namespace task_final.Controllers {
 				shopping_list.TotalCost = 0;
 				foreach (ShoppingProduct shopping_product_2 in context.ShoppingProducts.Where(sp => sp.ShoppingListID == shopping_list.ID).ToList()) {
 					shopping_list.TotalCost += shopping_product_2.TotalPrice;
-					shopping_list.Status = "Not Purchased";
+					shopping_product_2.Status = "Not Purchased";
 				}
 				context.SaveChanges();
 			}

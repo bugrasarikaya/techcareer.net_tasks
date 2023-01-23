@@ -1,0 +1,2 @@
+While watching recod, a bug which is showing shopping list status as "Not Purchased" after changing quantity of product, was noticed and it was fixed before deadline.
+But a new video could not be recorded because of low time.
